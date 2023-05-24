@@ -558,10 +558,10 @@ $(() => {
       let dark_stars_html = "";
 
       for (let i = 0; i <= count + 1; i += 2)
-        stars_html += `<img data-star="${i}" src="/static/images/full_star.svg" width="20px" height="20px" alt="close icon" class="star_icon">`;
+        stars_html += `<img data-star="${i}" src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/full_star.svg" width="20px" height="20px" alt="close icon" class="star_icon">`;
 
       for (let i = 0; i <= 5 - count + 1; i += 2)
-        dark_stars_html += `<img data-star="${i}" src="/static/images/full_star.svg" width="20px" height="20px" alt="close icon" class="dark_star_icon">`;
+        dark_stars_html += `<img data-star="${i}" src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/full_star.svg" width="20px" height="20px" alt="close icon" class="dark_star_icon">`;
 
       const rating_html = `
       <div id="anime_score_wrapper">

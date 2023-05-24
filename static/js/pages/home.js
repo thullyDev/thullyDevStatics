@@ -1,6 +1,7 @@
 let page_toggle = "sub";
 let page_source = "gogoanime";
-let page_url = "https://gogoanime-thullydev-api.onrender.com/recent-release?type=1"; // TODO: remember to change this to asad's gogoganime scraper
+let page_url =
+  "https://gogoanime-thullydev-api.onrender.com/recent-release?type=1"; // TODO: remember to change this to asad's gogoganime scraper
 let page_number = 1;
 let second_half_open = false;
 
@@ -10,7 +11,7 @@ const next_slider = () => {
   const first_slider = slider_children.first();
   const current_slider = $(".active_slider_item");
   const next_slider = current_slider.next();
-  
+
   if (next_slider.length != 0) {
     current_slider.fadeOut(fade_speed, () => {
       current_slider.removeClass("active_slider_item");
@@ -19,12 +20,11 @@ const next_slider = () => {
       $(".active_slider_item").fadeIn(fade_speed);
     });
   } else {
-		current_slider.fadeOut(fade_speed, () => {
-		  current_slider.removeClass("active_slider_item");
-		  first_slider.addClass("active_slider_item");
-		  $(".active_slider_item").fadeIn(fade_speed);
-		});
-	   
+    current_slider.fadeOut(fade_speed, () => {
+      current_slider.removeClass("active_slider_item");
+      first_slider.addClass("active_slider_item");
+      $(".active_slider_item").fadeIn(fade_speed);
+    });
   }
 };
 
@@ -292,10 +292,10 @@ const render_recent = (list_data, source) => {
           </div>
           <div class="anime_btns_wrapper">
             <button class="add_btn">
-              <img src="/static/images/plus.svg" alt="thumbs up icon">
+              <img src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/plus.svg" alt="thumbs up icon">
             </button>
             <button class="like_btn">
-              <img src="/static/images/thumbs-up.svg" alt="plus icon">
+              <img src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/thumbs-up.svg" alt="plus icon">
             </button>
           </div>
           </div>
@@ -363,21 +363,29 @@ const get_home_data = () => {
     let slider_html = ``;
     let count = 0;
     let slider_class_type = "";
-	
+
     list_data.forEach((item) => {
-      slider_class_type = count == 0 ? " active_slider_item" : ""
-	  const image_url = item.banner_image != null ? item.banner_image : item.cover_image 
-	  const slug = encodeURI(item.title.toLowerCase())
-	  const slider_anime_title = item.title.length >= 40 ? item.title.substring(0, 40)+"..." : item.title
+      slider_class_type = count == 0 ? " active_slider_item" : "";
+      const image_url =
+        item.banner_image != null ? item.banner_image : item.cover_image;
+      const slug = encodeURI(item.title.toLowerCase());
+      const slider_anime_title =
+        item.title.length >= 40
+          ? item.title.substring(0, 40) + "..."
+          : item.title;
       const sliders_html = `<li class="slider_item${slider_class_type}">
 					<div class="slider_img_wrapper">
-                      <img src="${image_url}" alt="${item.title}" class="slider_slider">
+                      <img src="${image_url}" alt="${
+        item.title
+      }" class="slider_slider">
 					</div>
 					<div class="slider_info_wrapper">  
 						<div class="inner_slider_info_wrapper">
 							<div class="slider_title">${slider_anime_title}</div>
 							<div class="slider_details_wrapper">
-								<div class="slider_season"><i class="fas fa-play-circle"></i> ${item.season} ${item.year} Anime </div>
+								<div class="slider_season"><i class="fas fa-play-circle"></i> ${item.season} ${
+        item.year
+      } Anime </div>
 								<div class="slider_year"><i class="fas fa-calendar"></i>${item.year}</div>
 								<div class="slider_type">${item.type}</div>
 								<div class="slider_status">${item.status.toLowerCase()}</div>
@@ -390,16 +398,16 @@ const get_home_data = () => {
 						</div>
 					</div>
 				</li>`;
-      slider_html += sliders_html
+      slider_html += sliders_html;
       count++;
     });
-	
+
     const slider_inner_html = slider_html;
-	const temp = `<ul id="slider_list_wrapper">${slider_inner_html}</ul>`
+    const temp = `<ul id="slider_list_wrapper">${slider_inner_html}</ul>`;
     slider_inner_wrapper.innerHTML = temp;
-	// console.log(slider_html)
-	console.log(temp)
-	// console.log(slider_inner_wrapper.innerHTML)
+    // console.log(slider_html)
+    console.log(temp);
+    // console.log(slider_inner_wrapper.innerHTML)
     const prev_btn = document.getElementById("prev_btn");
     const next_btn = document.getElementById("next_btn");
     prev_btn.addEventListener("click", () => prev_slider());
@@ -426,7 +434,9 @@ const get_home_data = () => {
 
       slider_data.status_code == 200 && slider_data.slider_enabled == true
         ? render_slider(slider_data.slider_data)
-        : console.log("something went wrong getting slider data or the slider has been disabled");
+        : console.log(
+            "something went wrong getting slider data or the slider has been disabled"
+          );
 
       recent_data.status_code == 200
         ? render_recent(recent_data.recent_data)
@@ -434,7 +444,9 @@ const get_home_data = () => {
 
       schedule_data.status_code == 200 && schedule_data.schedule_enabled == true
         ? render_schedule(schedule_data.schedule_data)
-        : console.log("something went wrong getting schedule data or the schedule has been disabled");
+        : console.log(
+            "something went wrong getting schedule data or the schedule has been disabled"
+          );
 
       page_loader_wrapper.css("display", "none");
     },
@@ -480,7 +492,9 @@ const render_coming_data = async (coming_wrapper_id) => {
               ${item.title.substring(0, 25)}...
             </div>
             <div class="list_anime_top_info_wrapper premiere_info_wrapper">
-              <div class="list_anime_anime_type_wrapper">${item.anime_type}</div>
+              <div class="list_anime_anime_type_wrapper">${
+                item.anime_type
+              }</div>
               <div class="list_anime_year_wrapper">${item.year}</div>
             </div>
           </div>
@@ -586,9 +600,10 @@ const render_coming_data = async (coming_wrapper_id) => {
   const res_data = JSON.parse(response_data);
 
   if (res_data.coming_section_enabled == true) {
-	  if (coming_wrapper_id == "premieres") render_premiere(res_data.data);
-	  else if (coming_wrapper_id == "complete") render_complete(res_data.data.data);
-	  else render_upcoming(res_data.data.data);
+    if (coming_wrapper_id == "premieres") render_premiere(res_data.data);
+    else if (coming_wrapper_id == "complete")
+      render_complete(res_data.data.data);
+    else render_upcoming(res_data.data.data);
   }
 };
 
@@ -766,5 +781,6 @@ setInterval(() => {
   const inner_time_date_wrapper = document.getElementById(
     "inner_time_date_wrapper"
   );
-  if(home_schedule == "True") inner_time_date_wrapper.textContent = date_time_string;
+  if (home_schedule == "True")
+    inner_time_date_wrapper.textContent = date_time_string;
 }, 1000);

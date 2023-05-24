@@ -321,7 +321,7 @@ $(".auth_btn_wrapper").click(function () {
 const url_params = new URLSearchParams(window.location.search);
 const login_redirect = url_params.get('login_redirect');
 const is_auth = check_authentication();
-is_auth == false ? $("#menu_account_details_wrapper>.auth_btn_wrapper").html('Login <img src="/static/images/login.svg" width="15px" height="15px" alt="" class="footer_socials">') : $("#menu_account_details_wrapper>.auth_btn_wrapper").html('Logout <img src="/static/images/login.svg" width="15px" height="15px" alt="" class="footer_socials">')
+is_auth == false ? $("#menu_account_details_wrapper>.auth_btn_wrapper").html('Login <img src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/login.svg" width="15px" height="15px" alt="" class="footer_socials">') : $("#menu_account_details_wrapper>.auth_btn_wrapper").html('Logout <img src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/login.svg" width="15px" height="15px" alt="" class="footer_socials">')
 is_auth == false ? $("#mobile_nav_wrapper>.auth_btn_wrapper").html('Login') : $("#mobile_nav_wrapper>.auth_btn_wrapper").html('Logout')
 is_auth == false ? $("#mobile_nav_wrapper>.auth_btn_wrapper").html('Login') : $("#mobile_nav_wrapper>.auth_btn_wrapper").html('Logout')
 
