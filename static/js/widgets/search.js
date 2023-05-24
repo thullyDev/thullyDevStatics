@@ -80,7 +80,7 @@ search_view_all_wrapper.click(function() {
 
 
 search_btn.addEventListener("click", function() {
-  const val = $(this).val()
+  const val = search.value;
   
   if (val != "") window.location.replace(`/browsing?keyword=${encodeURI(val)}&type=&status=&season=&language=&sort=default&year=&genre=&page=`);
 });
