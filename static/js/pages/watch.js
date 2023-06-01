@@ -508,7 +508,7 @@ $(() => {
           data: {
             csrfmiddlewaretoken: csrf_token,
             slug: slug,
-            anime_title: anime_title,
+            anime_title: g_anime_tile,
             watch_type: watch_type,
           },
           beforeSend: () => {
