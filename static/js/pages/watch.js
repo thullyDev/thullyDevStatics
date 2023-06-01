@@ -86,7 +86,8 @@ $(() => {
   const render_anime_details = (data, watch_type = "") => {
 	if (data.episodesList.length == 0) window.location.replace("/alert?message=The%20first%20episode%20hasn%27t%20not%20come%20out%20yet&sub_message=please%20wait%20for%20it%20to%20be%20air");
     let genres_text = "";
-    anime_title = data.animeTitle;
+    const anime_title = data.animeTitle;
+    g_anime_tile = data.animeTitle;
     episode_list = data.episodesList.reverse();
     let index = episode_num - 1;
     episode = watch_type == "" ? episode_list[index] : episode_list[0];
