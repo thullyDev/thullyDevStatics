@@ -1,6 +1,7 @@
 $(() => {
   const page_loader_wrapper = $("#page_loader_wrapper");
   const player_loader_wrapper = $("#player_loader_wrapper");
+  let next_ready = true
   
   $('#player_iframe_wrapper, .server_btns').click(() => show_popup())
   
