@@ -73,7 +73,7 @@ $(() => {
 						<div class="other_anime_wrapper" data-slug="${
               item.animeId
             }" data-type="${type}">
-							  <a href="/watch/${item.animeId}?gga=true" class="other_anime_link">
+							  <a href="/watch/${encodeURI(item.animeTitle)}?gga=false" class="other_anime_link">
 								<div class="other_item_image_wrapper">
 								  <img src="${item.animeImg}" alt="${
             item.animeTitle
@@ -109,7 +109,7 @@ $(() => {
 							<div class="other_anime_wrapper" data-slug="${
                 item.animeId
               }" data-type="${type}">
-							  <a href="/watch/${item.animeId}?gga=true" class="other_anime_link">
+							  <a href="/watch/${encodeURI(item.animeTitle)}?gga=false" class="other_anime_link">
 								<div class="other_item_image_wrapper">
 								  <img src="${item.animeImg}" alt="${
               item.animeTitle
@@ -146,7 +146,7 @@ $(() => {
 							<div class="other_anime_wrapper" data-slug="${
                 item.animeId
               }" data-type="${type}">
-							  <a href="/watch/${item.animeId}?gga=true" class="other_anime_link">
+							  <a href="/watch/${encodeURI(item.animeTitle)}?gga=false" class="other_anime_link">
 								<div class="other_item_image_wrapper">
 								  <img src="${item.animeImg}" alt="${
               item.animeTitle
@@ -183,7 +183,7 @@ $(() => {
 							<div class="other_anime_wrapper" data-slug="${
                 item.animeId
               }" data-type="${type}">
-							  <a href="/watch/${item.animeId}?gga=true" class="other_anime_link">
+							  <a href="/watch/${encodeURI(item.animeTitle)}?gga=false" class="other_anime_link">
 								<div class="other_item_image_wrapper">
 								  <img src="${item.animeImg}" alt="${
               item.animeTitle
@@ -325,7 +325,7 @@ $(() => {
 				<div class="other_anime_wrapper" data-slug="${
           item.animeId
         }" data-type="${type}">
-				  <a href="/watch/${item.animeId}?gga=true" class="other_anime_link">
+				  <a href="/watch/${encodeURI(item.animeTitle)}?gga=false" class="other_anime_link">
 					<div class="other_item_image_wrapper">
 					  <img src="${item.animeImg}" alt="${
         item.animeTitle
