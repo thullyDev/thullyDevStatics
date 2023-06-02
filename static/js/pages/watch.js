@@ -266,16 +266,14 @@ $(() => {
       const this_ele = $(this);
       const type = this_ele.data("type");
       let pre_index = episode_num;
-      console.log({ pre_index, episode_num });
 	  show_popup()
+	  console.log("===============================");
 
       if (type == "previous") {
         if (episode_num != 1) pre_index = episode_num - 1;
       } else {
         if (episode_list.length > episode_num) pre_index = episode_num + 1;
       }
-
-      console.log({ pre_index, episode_num });
 
       if (pre_index != episode_num) {
         episode = episode_list[pre_index - 1];
