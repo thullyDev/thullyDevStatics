@@ -17,7 +17,7 @@ $(() => {
       const trending_anime_html = `
         <div class="trending_animes_item">
           <a class="trending_anime_link_wrapper" href="/watch/${
-            item.slug
+            item.title
           }?gga=false">
             <div class="trending_anime_img_wrapper">
                 <img width="100px" src="${item.image_url}" alt="${
@@ -60,7 +60,7 @@ $(() => {
       const related_anime_html = `
         <div class="related_animes_item">
           <a class="related_anime_link_wrapper" href="/watch/${
-            item.slug
+            item.item.title
           }?gga=true">
             <div class="related_anime_img_wrapper">
                 <img width="100px" src="${item.image_url}" alt="${
@@ -779,7 +779,7 @@ $(() => {
     },
 	error: function (jqXHR, textStatus, errorThrown) {
 	  if (jqXHR.status == 500) {
-		  window.location.replace("/alert?message=The%20anime%20you%20want%20%20is%20not%20out%20yet&sub_message=wait%20for%20the%20anime%20to%20be%20airing");
+		  alert("yeah, I am here")
 	  } else {
 		  show_alert('Unexpected error.');
 	  }
