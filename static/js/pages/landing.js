@@ -10,7 +10,7 @@ $(() => {
 			const search_anime_title = item.animeTitle.length >= 20 ? `${item.animeTitle.substring(0, 20)}...  ` : item.animeTitle
 			search_links_html += `
 				<span class="top_search_link_wrapper">
-					<a href="/watch/${item.animeId}?gga=true" id="top_search_link">
+					<a href="/watch/${encodeURI(item.animeTitle)}?gga=false" id="top_search_link">
 						${search_anime_title}
 					</a>
 				</span>
