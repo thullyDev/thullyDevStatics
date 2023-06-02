@@ -69,7 +69,7 @@ const render_recent = (list_data, source) => {
       if (item.season != null && item.year != null) {
         anime_html = `
         <div  class="anime_wrapper" data-gga="false" data-slug="${item.slug}">
-          <a href="/watch/${item.slug}?ep=${item.episode}&gga=false">
+          <a href="/watch/${encodeURI(item.title)}?ep=${item.episode}&gga=false">
               <div class="anime_cover_wrapper">
                   <div class="anime_img_details_cover_wrapper">
                       <div class="anime_img_cover_wrapper">
@@ -113,7 +113,7 @@ const render_recent = (list_data, source) => {
       } else {
         anime_html = `
         <div  class="anime_wrapper" data-gga="true" data-slug="${item.slug}">
-          <a href="/watch/${item.slug}?ep=${item.episode}&gga=false">
+          <a href="/watch/${encodeURI(item.title)}?ep=${item.episode}&gga=false">
               <div class="anime_cover_wrapper">
                   <div class="anime_img_details_cover_wrapper">
                       <div class="anime_img_cover_wrapper">
@@ -162,7 +162,7 @@ const render_recent = (list_data, source) => {
     list_data.forEach((item) => {
       anime_html = `
       <div  class="anime_wrapper" data-gga="true" data-slug="${item.slug}">
-        <a href="/watch/${item.slug}?ep=${item.episode}&gga=false">
+        <a href="/watch/${encodeURI(item.title)}?ep=${item.episode}&gga=false">
             <div class="anime_cover_wrapper">
                 <div class="anime_img_details_cover_wrapper">
                     <div class="anime_img_cover_wrapper">
@@ -325,7 +325,7 @@ const render_schedule = (list_data) => {
             <div class="schedule_anime_name_wrapper">${item.title}</div>
           </div>
           <div class="schedule_anime_episode_wrapper">
-              <a href="watch/id?ep=${item.episode}&gga=false" class="schedule_anime_link">
+              <a href="watch/${encodeURI(item.title)}?ep=${item.episode}&gga=false" class="schedule_anime_link">
                 <p>
                 Episode ${item.episode}
                 </p>
@@ -392,7 +392,7 @@ const get_home_data = () => {
 								<div class="slider_des">${item.description.substring(0, 100)}...</div>
 							</div>
 							<div class="slider_watch_btns_wrapper">
-								<a href="/watch/${slug}&gga=false" class="slider_watch_link">
+								<a href="/watch/${encodeURI(item.title)}&gga=false" class="slider_watch_link">
 								<i class="fas fa-play-circle"></i>Watch Now</a>
 							</div>
 						</div>
@@ -478,7 +478,7 @@ const render_coming_data = async (coming_wrapper_id) => {
           data-slug="${item.title}"
           data-gga="false"
         >
-        <a href="/watch/${item.title}?gga=false" class="list_anime_link">
+        <a href="/watch/${encodeURI(item.title)}?gga=false" class="list_anime_link">
           <div class="list_anime_img_wrapper">
             <img
               width="100px"
@@ -520,7 +520,7 @@ const render_coming_data = async (coming_wrapper_id) => {
           data-slug="${item.title}"
           data-gga="false"
         >
-        <a href="/watch/${item.title}?gga=false" class="list_anime_link">
+        <a href="/watch/${encodeURI(item.title)}?gga=false" class="list_anime_link">
           <div class="list_anime_img_wrapper">
             <img
               width="100px"
@@ -564,7 +564,7 @@ const render_coming_data = async (coming_wrapper_id) => {
           data-slug="${item.title}"
           data-gga="false"
         >
-        <a href="/watch/${item.title}?gga=false" class="list_anime_link">
+        <a href="/watch/${encodeURI(item.title)}?gga=false" class="list_anime_link">
           <div class="list_anime_img_wrapper">
             <img
               width="100px"
