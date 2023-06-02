@@ -499,6 +499,7 @@ $(() => {
     $(".anime_sub_dub_btn").click(function () {
       const this_ele = $(this);
       const watch_type = this_ele.data("watch-type");
+      console.log({ watch_type });
       const loader_episodes_wrapper = $("#load_anime_episodes_wrapper");
 
       const get_watch_type = () => {
