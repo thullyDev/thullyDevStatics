@@ -508,8 +508,8 @@ $(() => {
           url: "/get_watch_type",
           data: {
             csrfmiddlewaretoken: csrf_token,
-            slug: anime_slug,
-            anime_title: anime_title,
+            slug: slug,
+            anime_title: g_anime_title,
             watch_type: watch_type,
           },
           beforeSend: () => {
