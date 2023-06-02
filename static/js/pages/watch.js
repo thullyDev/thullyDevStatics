@@ -263,11 +263,12 @@ $(() => {
     });
 
     $(".next_prev_btn").click(async function () {
+	  if (next_ready == false) return null
       const this_ele = $(this);
       const type = this_ele.data("type");
       let pre_index = episode_num;
+	  next_ready = false
 	  show_popup()
-	  console.log("===============================");
 
       if (type == "previous") {
         if (episode_num != 1) pre_index = episode_num - 1;
@@ -278,7 +279,6 @@ $(() => {
       if (pre_index != episode_num) {
         episode = episode_list[pre_index - 1];
         const slug = episode.episodeId;
-        console.log({ episode });
         let source = "";
         player_loader_wrapper.css("display", "flex");
 
@@ -326,6 +326,10 @@ $(() => {
           "active_ele"
         );
       } else console.log("already got that for you buddy...");
+	  
+	  setTimeout(function () {
+		  next_ready = true
+	  }, 1000)
     });
 
     $(".server_btns").click(function () {
