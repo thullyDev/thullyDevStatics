@@ -87,13 +87,14 @@ $(() => {
 	if (data.episodesList.length == 0) window.location.replace("/alert?message=The%20first%20episode%20hasn%27t%20not%20come%20out%20yet&sub_message=please%20wait%20for%20it%20to%20be%20air");
     let genres_text = "";
     const anime_title = data.animeTitle;
-    g_anime_tile = data.animeTitle;
+	g_anime_tile = data.animeTitle;
     episode_list = data.episodesList.reverse();
     let index = episode_num - 1;
     episode = watch_type == "" ? episode_list[index] : episode_list[0];
 	console.log({episode_list, index, episode})
     slug = data.slug;
     episode_num = parseInt(episode.episodeNum);
+
     if (episode_notice == "True") {
 		document.getElementById("episode_text").textContent = `episode ${episode_num}`;
 	}
@@ -379,7 +380,7 @@ $(() => {
 
         switch (server_num) {
           case 0:
-            source = `/stream/0/${episode_slug}?anime_slug=${anime_slug}`;
+            source = `/stream/0/${episode_slug}?anime_slug=${slug}`;
             break;
           case 1:
             source = `/stream/1/${episode_slug}`;
@@ -499,7 +500,6 @@ $(() => {
     $(".anime_sub_dub_btn").click(function () {
       const this_ele = $(this);
       const watch_type = this_ele.data("watch-type");
-      console.log({ watch_type });
       const loader_episodes_wrapper = $("#load_anime_episodes_wrapper");
 
       const get_watch_type = () => {
@@ -508,8 +508,8 @@ $(() => {
           url: "/get_watch_type",
           data: {
             csrfmiddlewaretoken: csrf_token,
-            slug: slug,
-            anime_title: g_anime_tile,
+            slug: anime_slug,
+            anime_title: anime_title,
             watch_type: watch_type,
           },
           beforeSend: () => {
@@ -518,7 +518,6 @@ $(() => {
           success: (res) => {
             const res_data = JSON.parse(res);
             const anime_details = res_data.anime_details;
-            console.log({ anime_details });
 
             if (anime_details.status_code == 200)
               render_anime_details(anime_details.anime_details, watch_type);
