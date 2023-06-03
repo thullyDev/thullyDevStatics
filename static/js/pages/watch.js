@@ -14,11 +14,12 @@ $(() => {
     let trending_animes_html = "";
 
     list_data.forEach((item) => {
-		item.title == "" && return null
+		if (item.title == "") return null
+		
       const trending_anime_html = `
         <div class="trending_animes_item">
           <a class="trending_anime_link_wrapper" href="/watch/${
-            item.title
+			  encodeURI(item.title)
           }?gga=false">
             <div class="trending_anime_img_wrapper">
                 <img width="100px" src="${item.image_url}" alt="${
@@ -59,12 +60,12 @@ $(() => {
 
     list_data.forEach((item) => {
 		
-	  item.title == "" && return null
+	 if (item.title == "") return null
 		
       const related_anime_html = `
         <div class="related_animes_item">
           <a class="related_anime_link_wrapper" href="/watch/${
-            item.title
+            encodeURI(item.title)
           }?gga=false">
             <div class="related_anime_img_wrapper">
                 <img width="100px" src="${item.image_url}" alt="${
