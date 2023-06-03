@@ -5,7 +5,7 @@ const get_likes_list_data = () => {
     const like_list_label_wrapper = document.getElementById("like_list_label_wrapper");
     let animes_html = "";
     list_data.forEach((item) => {
-	  if (anime.animeTitle == "") return null
+	  if (item.animeTitle == "") return null
       const anime_html = `
         <div class="anime_wrapper hori_anime_wrapper" data-hover-type="false" data-id="${
           item.animeId
