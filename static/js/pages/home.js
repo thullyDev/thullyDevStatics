@@ -212,103 +212,6 @@ const render_recent = (list_data, source) => {
   second_animes_wrapper.style.display = "none";
   first_animes_wrapper.innerHTML = first_animes_html;
   second_animes_wrapper.innerHTML = second_animes_html;
-  /*
-  if (view_port === "desktop") {
-    $('.anime_wrapper[data-gga="true"]').hover(
-      async function () {
-        console.log("hovering");
-        const slug = $(this).data("slug");
-        const gga = $(this).data("gga");
-        const anime_info_ele = $(this).children(".anime_info_wrapper");
-        anime_info_ele.fadeIn();
-        console.log({ slug, gga });
-        const data = await get_anime_info(slug, gga);
-        console.log(data);
-        let anime_info_html = `
-          <div class="anime_name_info_wrapper">
-            ${data.title}
-          </div>
-          <div class="anime_synopsis_info_wrapper">
-            ${data.synopsis.substring(0, 100)}...
-          </div>
-          <div class="anime_other_info_wrapper">
-          <div class="other_info_wrapper">
-            <p class="other_info_label">
-              Other names:
-            </p>
-            <p class="other_info_value">
-              ${data.other_names}
-            </p>
-          </div>
-          <div class="other_info_wrapper">
-            <p class="other_info_label">
-              Realease date:
-            </p>
-            <p class="other_info_value">
-                ${data.release_date}
-            </p>
-          </div>
-          <div class="other_info_wrapper">
-            <p class="other_info_label">
-              Status:
-            </p>
-            <p class="other_info_value">
-              ${data.status}
-            </p>
-          </div>
-          <div class="other_info_wrapper">
-            <p class="other_info_label">
-              Episodes:
-            </p>
-            <p class="other_info_value">
-              ${data.total_episodes}
-            </p>
-          </div>
-          <div class="other_info_wrapper">
-            <p class="other_info_label">
-              Type:
-            </p>
-            <p class="other_info_value">
-            ${data.type}
-            </p>
-          </div>
-          <div class="other_info_wrapper">
-            <p class="other_info_label">
-              Genres:
-            </p>
-            <p class="other_info_value genre_info_value">
-            ${data.genres}
-            </p>
-          </div>
-          </div>
-          <div class="anime_acts_wrapper">
-          <div class="anime_watch_link_wrapper">
-            <a href="/watch/${slug}?ep=${
-          data.total_episodes
-        }&gga=false" class="anime_watch_link">
-              <i class="fa fa-play" aria-hidden="true"></i>
-              WATCH NOW
-            </a>
-          </div>
-          <div class="anime_btns_wrapper">
-            <button class="add_btn">
-              <img src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/plus.svg" alt="thumbs up icon">
-            </button>
-            <button class="like_btn">
-              <img src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/thumbs-up.svg" alt="plus icon">
-            </button>
-          </div>
-          </div>
-      `;
-        anime_info_ele.html(anime_info_html);
-      },
-      function () {
-        const anime_id = $(this).data("id");
-        $(`#${anime_id}_info_wrapper`).fadeOut();
-      }
-    );
-  }
-  */
 };
 
 const render_schedule = (list_data) => {
@@ -681,7 +584,6 @@ $(() => {
   });
 
   prev_toggle_btn.click(async function () {
-    console.log({ second_half_open });
     if (second_half_open == false) {
       if (page_number > 1) {
         page_number--;
@@ -689,10 +591,10 @@ $(() => {
         const response = await fetch(api_url);
         const res_data = await response.json();
         const data = process_toggle_data(res_data, page_source);
-        render_recent(data, page_source);
+        render_recent(data, page_source, page_number);
+		next_toggle_btn.click()
       }
     } else {
-      console.log("closing second_half");
       second_half_open = false;
       document.getElementById("first_half_animes_wrapper").style.display =
         "flex";
@@ -702,7 +604,6 @@ $(() => {
   });
 
   next_toggle_btn.click(async function () {
-    console.log({ second_half_open });
     if (second_half_open == true) {
       page_number++;
       const api_url = `${page_url}&page=${page_number}`;
