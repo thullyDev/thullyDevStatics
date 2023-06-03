@@ -1,8 +1,8 @@
-const get_likes_list_data = () => {
-  const render_likes_list = (list_data, is_user) => {
+const get_watch_list_data = () => {
+  const render_watch_list = (list_data, is_user) => {
 	  console.log({list_data})
-    const animes_wrapper = document.getElementById("likes_list_inner_wrapper");
-    const like_list_label_wrapper = document.getElementById("like_list_label_wrapper");
+    const animes_wrapper = document.getElementById("watch_list_inner_wrapper");
+    const watch_list_label_wrapper = document.getElementById("watch_list_label_wrapper");
     let animes_html = "";
     list_data.forEach((item) => {
 	  if (anime.title == "") return null
@@ -33,11 +33,11 @@ const get_likes_list_data = () => {
       animes_html += anime_html;
     });
     animes_wrapper.innerHTML = animes_html;
-	like_list_label_wrapper.textContent = is_user == true ? "Liked animes" : "Top Airing animes"
+	watch_list_label_wrapper.textContent = is_user == true ? "Watch list animes" : "Popular animes"
   };
   $.ajax({
     type: "post",
-    url: "/get_likes_list_data",
+    url: "/get_watch_list_data",
     data: {
       csrfmiddlewaretoken: csrf_token,
     },
@@ -49,10 +49,10 @@ const get_likes_list_data = () => {
 	  console.log(res_data)
 
       res_data.status_code == 200
-        ? render_likes_list(res_data.likes_list_data, res_data.is_user)
-        : console.log("something went wrong getting likes list data...");
+        ? render_watch_list(res_data.watch_list_data, res_data.is_user)
+        : console.log("something went wrong getting watch list data...");
     },
   });
 };
 
-get_likes_list_data();
+get_watch_list_data();
