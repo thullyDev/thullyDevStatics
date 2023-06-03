@@ -5,7 +5,6 @@ $(() => {
   
   $('#player_iframe_wrapper, .server_btns').click(() => show_popup())
   
-  
   const render_trending = (list_data) => {
 	if (related_animes == "False") return null
     const trending_animes_list_wrapper = document.getElementById(
@@ -14,12 +13,10 @@ $(() => {
     let trending_animes_html = "";
 
     list_data.forEach((item) => {
-		if (item.title == "") return null
-		
       const trending_anime_html = `
         <div class="trending_animes_item">
           <a class="trending_anime_link_wrapper" href="/watch/${
-			  encodeURI(item.title)
+            item.slug
           }?gga=false">
             <div class="trending_anime_img_wrapper">
                 <img width="100px" src="${item.image_url}" alt="${
@@ -59,14 +56,11 @@ $(() => {
     let count = 1;
 
     list_data.forEach((item) => {
-		
-	 if (item.title == "") return null
-		
       const related_anime_html = `
         <div class="related_animes_item">
           <a class="related_anime_link_wrapper" href="/watch/${
-            encodeURI(item.title)
-          }?gga=false">
+            item.slug
+          }?gga=true">
             <div class="related_anime_img_wrapper">
                 <img width="100px" src="${item.image_url}" alt="${
         item.title
@@ -88,6 +82,19 @@ $(() => {
         ${related_animes_html}
     `;
   };
+  
+  const get_anime_episode = function(ep_num, ep_list) {
+	  for (let i = 0; i < ep_list.length; i++) {
+		  const item = ep_list[i]
+		  
+		  if (parseInt(item.episodeNum) == parseInt(ep_num)) {
+			  return item
+		  } 
+	  }
+	  
+	return ep_list[0]
+  }
+
 
   const render_anime_details = (data, watch_type = "") => {
 	if (data.episodesList.length == 0) window.location.replace("/alert?message=The%20first%20episode%20hasn%27t%20not%20come%20out%20yet&sub_message=please%20wait%20for%20it%20to%20be%20air");
@@ -96,7 +103,8 @@ $(() => {
 	g_anime_title = data.animeTitle;
     episode_list = data.episodesList.reverse();
     let index = episode_num - 1;
-    episode = watch_type == "" ? episode_list[index] : episode_list[0];
+    episode = watch_type == "" ? get_anime_episode(index, episode_list) : get_anime_episode(0, episode_list)
+	
 	console.log({episode_list, index, episode})
     slug = data.slug;
     episode_num = parseInt(episode.episodeNum);
@@ -124,18 +132,12 @@ $(() => {
 
     for (let i = 0; i <= episode_list.length; i += chunk_size) {
       const chunk = episode_list.slice(i, i + chunk_size);
-	  let chunk_id = ""
-	  if (count > 1) {
-		  chunk_id =
-			episode_list.length <= 100
-			  ? `${count}_${episode_list.length}`
-			  : `${count}_${count + chunk.length - 1}`;
-	  } else {
-		  chunk_id =
-			episode_list.length <= 100
-			  ? `${count}_${episode_list.length}`
-			  : `${count}_${count + chunk.length}`;
-	  }
+
+      const chunk_id =
+        episode_list.length <= 100
+          ? `${count}_${episode_list.length}`
+          : `${count}_${count + chunk.length}`;
+
       if (count == 1)
         open_btn_html = `<button id="anime_eps_open_btn">${chunk_id.replace(
           "_",
@@ -289,7 +291,7 @@ $(() => {
       }
 
       if (pre_index != episode_num) {
-        episode = episode_list[pre_index - 1];
+        episode = get_anime_episode(pre_index - 1, episode_list)
         const slug = episode.episodeId;
         let source = "";
         player_loader_wrapper.css("display", "flex");
@@ -384,10 +386,12 @@ $(() => {
     $(".anime_ep_btn").click(async function () {
       const this_ele = $(this);
       const episode_slug = this_ele.data("episode-slug");
-      const episode = parseInt(this_ele.data("episode"));
+      const t_episode = parseInt(this_ele.data("episode"));
+	  
 	  show_popup()
 
-      if (episode != episode_num) {
+      if (t_episode != episode_num) {
+		episode = get_anime_episode(t_episode - 1, episode_list)
         const player_loader_wrapper = $("#player_loader_wrapper");
         player_loader_wrapper.css("display", "flex");
         let source = "";
@@ -787,10 +791,29 @@ $(() => {
       load_episode();
 
       page_loader_wrapper.css("display", "none");
+	  
+	  $(".eps_column_wrapper").each(function(i, obj) {
+		  const this_ele = $(this)
+		  const col_id = this_ele.attr("id")
+		  const ep_num = parseInt(episode_num)
+		  const min_num = parseInt($.trim(col_id.split("_")[0]))
+		  const max_num = parseInt($.trim(col_id.split("_")[1]))
+		  
+		  if ( ep_num >= min_num && ep_num <= max_num ) {
+			  $(`.anime_eps_btn[data-column="${col_id}"]`).click()
+			  document.getElementById(`${ep_num}`).scrollIntoView({
+				  behavior: "smooth",
+				  block: "nearest",
+				  inline: "start",
+			  });
+		  }
+		  
+		  
+		})
     },
 	error: function (jqXHR, textStatus, errorThrown) {
 	  if (jqXHR.status == 500) {
-		  window.location.replace("/alert?message=The%20first%20episode%20hasn%27t%20not%20come%20out%20yet&sub_message=please%20wait%20for%20it%20to%20be%20air");
+		  window.location.replace("/alert?message=The%20anime%20you%20want%20%20is%20not%20out%20yet&sub_message=wait%20for%20the%20anime%20to%20be%20airing");
 	  } else {
 		  show_alert('Unexpected error.');
 	  }
