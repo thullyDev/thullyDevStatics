@@ -790,7 +790,7 @@ $(() => {
     },
 	error: function (jqXHR, textStatus, errorThrown) {
 	  if (jqXHR.status == 500) {
-		  alert("yeah, I am here")
+		  window.location.replace("/alert?message=The%20first%20episode%20hasn%27t%20not%20come%20out%20yet&sub_message=please%20wait%20for%20it%20to%20be%20air");
 	  } else {
 		  show_alert('Unexpected error.');
 	  }
