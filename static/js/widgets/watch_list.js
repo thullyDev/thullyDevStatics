@@ -5,12 +5,12 @@ const get_watch_list_data = () => {
     const watch_list_label_wrapper = document.getElementById("watch_list_label_wrapper");
     let animes_html = "";
     list_data.forEach((item) => {
-	  if (anime.title == "") return null
+	  if (anime.animeTitle == "") return null
       const anime_html = `
         <div class="anime_wrapper hori_anime_wrapper" data-hover-type="false" data-id="${
           item.animeId
         }" data-slug="${item.animeId}">
-        <a href="/watch/${encodeURI(item.title)}?ep=${item.episode}&gga=true">
+        <a href="/watch/${encodeURI(item.animeTitle)}?ep=${item.episode}&gga=true">
             <div class="anime_cover_wrapper">
                 <div class="anime_img_details_cover_wrapper">
                     <div class="anime_img_cover_wrapper">
