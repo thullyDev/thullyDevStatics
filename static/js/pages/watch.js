@@ -124,12 +124,18 @@ $(() => {
 
     for (let i = 0; i <= episode_list.length; i += chunk_size) {
       const chunk = episode_list.slice(i, i + chunk_size);
-
-      const chunk_id =
-        episode_list.length <= 100
-          ? `${count}_${episode_list.length}`
-          : `${count}_${count + chunk.length}`;
-
+	  let chunk_id = ""
+	  if (count > 1) {
+		  chunk_id =
+			episode_list.length <= 100
+			  ? `${count}_${episode_list.length}`
+			  : `${count}_${count + chunk.length - 1}`;
+	  } else {
+		  chunk_id =
+			episode_list.length <= 100
+			  ? `${count}_${episode_list.length}`
+			  : `${count}_${count + chunk.length}`;
+	  }
       if (count == 1)
         open_btn_html = `<button id="anime_eps_open_btn">${chunk_id.replace(
           "_",
