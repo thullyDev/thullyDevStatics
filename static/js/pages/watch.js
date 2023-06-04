@@ -387,6 +387,7 @@ $(() => {
 
     $(".anime_ep_btn").click(async function () {
       const this_ele = $(this);
+      const t_episode_number = this_ele.data("episode")
       const episode_slug = this_ele.data("episode-slug");
       const t_episode = parseInt(this_ele.data("episode"));
 	  
@@ -436,7 +437,7 @@ $(() => {
           .addClass("inactive_ele")
           .removeClass("active_ele");
         this_ele.addClass("active_ele");
-        episode_num = episode;
+        episode_num = t_episode_number;
         document.getElementById(
           "episode_text"
         ).textContent = `episode ${episode_num}`;
