@@ -99,7 +99,7 @@ $(() => {
 
 
   const render_anime_details = (data, watch_type = "") => {
-	if (data.episodesList.length == 0 || data.episodesList.length == null || data.episodesList.length == undefined) window.location.replace("/alert?message=The%20first%20episode%20hasn%27t%20not%20come%20out%20yet&sub_message=please%20wait%20for%20it%20to%20be%20airing");
+	if (data.episodesList.length == 0 || data.episodesList.length == null || data.episodesList.length == undefined) window.location.replace("/alert?message=" + encodeURI(data.animeTitle) + "%20hasn%27t%20not%20come%20out%20yet&sub_message=please%20wait%20for%20it%20to%20be%20air");
     let genres_text = ""; 
     const anime_title = data.animeTitle;
 	g_anime_title = data.animeTitle;
@@ -580,10 +580,10 @@ $(() => {
       let dark_stars_html = "";
 
       for (let i = 0; i <= count + 1; i += 2)
-        stars_html += `<img data-star="${i}" src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/full_star.svg" width="20px" height="20px" alt="close icon" class="star_icon">`;
+        stars_html += `<img data-star="${i}" src="//thullydev.github.io/as2anime_static/static/images/full_star.svg" width="20px" height="20px" alt="close icon" class="star_icon">`;
 
       for (let i = 0; i <= 5 - count + 1; i += 2)
-        dark_stars_html += `<img data-star="${i}" src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/full_star.svg" width="20px" height="20px" alt="close icon" class="dark_star_icon">`;
+        dark_stars_html += `<img data-star="${i}" src="//thullydev.github.io/as2anime_static/static/images/full_star.svg" width="20px" height="20px" alt="close icon" class="dark_star_icon">`;
 
       const rating_html = `
       <div id="anime_score_wrapper">
