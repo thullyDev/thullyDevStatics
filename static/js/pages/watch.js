@@ -803,11 +803,14 @@ $(() => {
 		  
 		  if ( ep_num >= min_num && ep_num <= max_num ) {
 			  $(`.anime_eps_btn[data-column="${col_id}"]`).click()
-			  document.getElementById(`${ep_num}`).scrollIntoView({
-				  behavior: "smooth",
-				  block: "nearest",
-				  inline: "start",
-			  });
+			  
+			  setTimeout(function() {
+				  document.getElementById(`${ep_num}`).scrollIntoView({
+					  behavior: "smooth",
+					  block: "nearest",
+					  inline: "start",
+				  });
+			  }, 1000)
 		  }
 		  
 		  
