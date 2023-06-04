@@ -64,7 +64,7 @@ $(() => {
         <div class="related_animes_item">
           <a class="related_anime_link_wrapper" href="/watch/${
             title
-          }?gga=true">
+          }?gga=false">
             <div class="related_anime_img_wrapper">
                 <img width="100px" src="${item.image_url}" alt="${
         item.title
