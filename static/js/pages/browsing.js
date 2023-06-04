@@ -24,11 +24,13 @@ $(() => {
             ? (anime_types_html += `<p class="anime_type  ${attr.toLowerCase()}_type">${attr}</p>`)
             : (anime_eps_html += `<p class="anime_eps">${attr}</p>`);
         }
+		
+		
 
         const anime_html = `
           <div  class="anime_wrapper" data-gga="false" data-slug="${item.slug}" style="${style}">
             <a class="anime_link" href="/watch/${encodeURI(
-              item.slug.toLowerCase()
+              item.title
             )}?gga=false">
                 <div class="anime_cover_wrapper">
                     <div class="anime_img_details_cover_wrapper">
@@ -80,7 +82,7 @@ $(() => {
             data-slug="${item.slug}"
             data-gga="true"
           >
-          <a href="/watch/${item.slug}?gga=true" class="list_anime_link">
+          <a href="/watch/${encodeURI(item.title)}?gga=false" class="list_anime_link">
             <div class="list_anime_img_wrapper">
               <img
                 width="100px"
