@@ -105,7 +105,7 @@ $(() => {
 	g_anime_title = data.animeTitle;
     episode_list = data.episodesList.reverse();
     let index = episode_num - 1;
-    episode = watch_type == "" ? get_anime_episode(index, episode_list) : get_anime_episode(0, episode_list)
+    episode = watch_type == "" ? get_anime_episode(index, episode_list) : get_anime_episode(1, episode_list)
 	
 	console.log({episode_list, index, episode})
     slug = data.slug;
@@ -293,7 +293,7 @@ $(() => {
       }
 
       if (pre_index != episode_num) {
-        episode = get_anime_episode(pre_index - 1, episode_list)
+        episode = get_anime_episode(pre_index, episode_list)
         const slug = episode.episodeId;
         let source = "";
         player_loader_wrapper.css("display", "flex");
@@ -393,7 +393,7 @@ $(() => {
 	  show_popup()
 
       if (t_episode != episode_num) {
-		episode = get_anime_episode(t_episode - 1, episode_list)
+		episode = get_anime_episode(t_episode, episode_list)
         const player_loader_wrapper = $("#player_loader_wrapper");
         player_loader_wrapper.css("display", "flex");
         let source = "";
