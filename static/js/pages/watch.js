@@ -99,7 +99,7 @@ $(() => {
 
 
   const render_anime_details = (data, watch_type = "") => {
-	if (data.episodesList.length == 0 || data.episodesList.length == null || data.episodesList.length == undefined) window.location.replace("/alert?message=The%20first%20episode%20hasn%27t%20not%20come%20out%20yet&sub_message=please%20wait%20for%20it%20to%20be%20air");
+	if (data.episodesList.length == 0 || data.episodesList.length == null || data.episodesList.length == undefined) window.location.replace("/alert?message=The%20first%20episode%20hasn%27t%20not%20come%20out%20yet&sub_message=please%20wait%20for%20it%20to%20be%20airing");
     let genres_text = ""; 
     const anime_title = data.animeTitle;
 	g_anime_title = data.animeTitle;
