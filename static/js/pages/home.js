@@ -160,6 +160,7 @@ const render_recent = (list_data, source) => {
     });
   } else {
     list_data.forEach((item) => {
+      if (item.title == "") return null
       anime_html = `
       <div  class="anime_wrapper" data-gga="true" data-slug="${item.slug}">
         <a href="/watch/${encodeURI(item.title)}?ep=${item.episode}&gga=false">
