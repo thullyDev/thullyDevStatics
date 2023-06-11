@@ -1,7 +1,6 @@
 let page_toggle = "sub";
 let page_source = "gogoanime";
-let page_url =
-  "https://gogoanime-thullydev-api.onrender.com/recent-release?type=1"; // TODO: remember to change this to asad's gogoganime scraper
+let page_url = "https://as2vid.co.in/recent-release?type=1";
 let page_number = 1;
 let second_half_open = false;
 
@@ -69,7 +68,9 @@ const render_recent = (list_data, source) => {
       if (item.season != null && item.year != null) {
         anime_html = `
         <div  class="anime_wrapper" data-gga="false" data-slug="${item.slug}">
-          <a href="/watch/${encodeURI(item.title)}?ep=${item.episode}&gga=false">
+          <a href="/watch/${encodeURI(item.title)}?ep=${
+          item.episode
+        }&gga=false">
               <div class="anime_cover_wrapper">
                   <div class="anime_img_details_cover_wrapper">
                       <div class="anime_img_cover_wrapper">
@@ -113,7 +114,9 @@ const render_recent = (list_data, source) => {
       } else {
         anime_html = `
         <div  class="anime_wrapper" data-gga="true" data-slug="${item.slug}">
-          <a href="/watch/${encodeURI(item.title)}?ep=${item.episode}&gga=false">
+          <a href="/watch/${encodeURI(item.title)}?ep=${
+          item.episode
+        }&gga=false">
               <div class="anime_cover_wrapper">
                   <div class="anime_img_details_cover_wrapper">
                       <div class="anime_img_cover_wrapper">
@@ -160,7 +163,6 @@ const render_recent = (list_data, source) => {
     });
   } else {
     list_data.forEach((item) => {
-      if (item.title == "") return null
       anime_html = `
       <div  class="anime_wrapper" data-gga="true" data-slug="${item.slug}">
         <a href="/watch/${encodeURI(item.title)}?ep=${item.episode}&gga=false">
@@ -229,7 +231,9 @@ const render_schedule = (list_data) => {
             <div class="schedule_anime_name_wrapper">${item.title}</div>
           </div>
           <div class="schedule_anime_episode_wrapper">
-              <a href="watch/${encodeURI(item.title)}?ep=${item.episode}&gga=false" class="schedule_anime_link">
+              <a href="watch/${encodeURI(item.title)}?ep=${
+        item.episode
+      }&gga=false" class="schedule_anime_link">
                 <p>
                 Episode ${item.episode}
                 </p>
@@ -309,9 +313,6 @@ const get_home_data = () => {
     const slider_inner_html = slider_html;
     const temp = `<ul id="slider_list_wrapper">${slider_inner_html}</ul>`;
     slider_inner_wrapper.innerHTML = temp;
-    // console.log(slider_html)
-    console.log(temp);
-    // console.log(slider_inner_wrapper.innerHTML)
     const prev_btn = document.getElementById("prev_btn");
     const next_btn = document.getElementById("next_btn");
     prev_btn.addEventListener("click", () => prev_slider());
@@ -333,8 +334,6 @@ const get_home_data = () => {
       const slider_data = res_data.slider_data;
       const recent_data = res_data.recent_data;
       const schedule_data = res_data.schedule_data;
-
-      console.log(recent_data);
 
       slider_data.status_code == 200 && slider_data.slider_enabled == true
         ? render_slider(slider_data.slider_data)
@@ -382,7 +381,9 @@ const render_coming_data = async (coming_wrapper_id) => {
           data-slug="${item.title}"
           data-gga="false"
         >
-        <a href="/watch/${encodeURI(item.title)}?gga=false" class="list_anime_link">
+        <a href="/watch/${encodeURI(
+          item.title
+        )}?gga=false" class="list_anime_link">
           <div class="list_anime_img_wrapper">
             <img
               width="100px"
@@ -424,7 +425,9 @@ const render_coming_data = async (coming_wrapper_id) => {
           data-slug="${item.title}"
           data-gga="false"
         >
-        <a href="/watch/${encodeURI(item.title)}?gga=false" class="list_anime_link">
+        <a href="/watch/${encodeURI(
+          item.title
+        )}?gga=false" class="list_anime_link">
           <div class="list_anime_img_wrapper">
             <img
               width="100px"
@@ -468,7 +471,9 @@ const render_coming_data = async (coming_wrapper_id) => {
           data-slug="${item.title}"
           data-gga="false"
         >
-        <a href="/watch/${encodeURI(item.title)}?gga=false" class="list_anime_link">
+        <a href="/watch/${encodeURI(
+          item.title
+        )}?gga=false" class="list_anime_link">
           <div class="list_anime_img_wrapper">
             <img
               width="100px"
@@ -536,7 +541,6 @@ const process_toggle_data = (res_data, source) => {
     }
   } else {
     const raw_data = res_data.data;
-    console.log(raw_data);
 
     for (i = 0; i < raw_data.length; i++) {
       const item = raw_data[i];
@@ -593,7 +597,7 @@ $(() => {
         const res_data = await response.json();
         const data = process_toggle_data(res_data, page_source);
         render_recent(data, page_source, page_number);
-		next_toggle_btn.click()
+        next_toggle_btn.click();
       }
     } else {
       second_half_open = false;
@@ -613,7 +617,6 @@ $(() => {
       const data = process_toggle_data(res_data, page_source);
       render_recent(data, page_source);
     } else {
-      console.log("opening second_half");
       second_half_open = true;
       document.getElementById("first_half_animes_wrapper").style.display =
         "none";
@@ -633,7 +636,6 @@ $(() => {
   schedule_days.click(async function () {
     const this_ele = $(this);
     const day = this_ele.data("day");
-    console.log({ day });
     this_ele.siblings().removeClass("active_schedule_day");
     this_ele.addClass("active_schedule_day");
     $.ajax({

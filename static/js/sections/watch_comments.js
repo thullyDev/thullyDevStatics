@@ -1,7 +1,5 @@
 //*** change yourdomain.in to your domain
 
-console.log({ anime_id });
-
 const disqus_config = function () {
   this.page.url = `https://yourdomain.in/watch/${anime_id}/`;
   this.page.identifier = anime_id;

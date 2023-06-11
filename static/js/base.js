@@ -7,8 +7,7 @@ const get_anime_info = async (slug, is_for_gogoanime) => {
     const response = await fetch(api_url);
     const res_data = await response.json();
     let genres_text = "";
-	
-	console.log(res_data)
+
     for (let i = 0; i < res_data.genres.length; i++) {
       const genre = res_data.genres[i];
       if (i == 0) genres_text += `${genre}`;
@@ -31,13 +30,14 @@ const get_anime_info = async (slug, is_for_gogoanime) => {
 };
 
 const add_to_list = async (slug, list) => {
-    const url = `/add_to_list/${list}/${slug}`;
-    const response = await fetch(url);
-    const raw_res_data = await response.json()
-	const res_data = JSON.parse(raw_res_data.replace(/'/g, '"'))
-	console.log(res_data)
-	
-	res_data.status_code == 503 ? render_authentication("login") : show_alert(res_data.message) 
+  const url = `/add_to_list/${list}/${slug}`;
+  const response = await fetch(url);
+  const raw_res_data = await response.json();
+  const res_data = JSON.parse(raw_res_data.replace(/'/g, '"'));
+
+  res_data.status_code == 503
+    ? render_authentication("login")
+    : show_alert(res_data.message);
 };
 
 $(window).click(function () {
@@ -103,9 +103,8 @@ const wrapper_act = (wrapper_id) => {
 };
 
 const get_trending_data = async () => {
-  if (page == "alert") return null
+  if (page == "alert") return null;
   const render_top_trending = (list_data) => {
-	console.log({list_data})
     const chunk_size = 10;
 
     for (let i = 0; i < list_data.length; i += chunk_size) {
@@ -176,7 +175,6 @@ const get_trending_data = async () => {
     },
     success: (res) => {
       const res_data = JSON.parse(res);
-	  console.log({res_data})
 
       res_data.status_code == 200 && res_data.top_animes_enabled == true
         ? render_top_trending(res_data.trending_data)
@@ -197,24 +195,23 @@ const get_trending_data = async () => {
 };
 
 const show_popup = () => {
-	if (is_popup_avl != true) return null
-	if (ad_cooldowned != true) return null
-	if (page_ads == "False") return null
-	if (is_vip == "True") return null
-	
-	$(".outter_popup_ad_wrapper").fadeIn()
-	ad_cooldowned = false
-}
+  if (is_popup_avl != true) return null;
+  if (ad_cooldowned != true) return null;
+  if (page_ads == "False") return null;
+  if (is_vip == "True") return null;
 
+  $(".outter_popup_ad_wrapper").fadeIn();
+  ad_cooldowned = false;
+};
 
 if (is_popup_avl == true && page_ads == "True") {
-	setInterval(function() {
-		ad_cooldowned = true
-	}, 60000*10); // 10 minutes *after ten minutes ad_cooldowned resets
+  setInterval(function () {
+    ad_cooldowned = true;
+  }, 60000 * 10); // 10 minutes *after ten minutes ad_cooldowned resets
 }
 
 get_view_port();
-if (page != "watch" && page != "landing" && page != "profile") get_trending_data();
+if (page != "watch" && page != "landing" && page != "profile")
+  get_trending_data();
 
-$("#popup_close_btn").click(() => $(".outter_popup_ad_wrapper").fadeOut())
-
+$("#popup_close_btn").click(() => $(".outter_popup_ad_wrapper").fadeOut());

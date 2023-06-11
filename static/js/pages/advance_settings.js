@@ -98,7 +98,6 @@ $(() => {
 
       for (const [key, val] of Object.entries(value_dict)) {
         const input_ele = $(`.settings_input[data-value="${key}"]`);
-        console.log({ key, val, input_ele });
         input_ele.data("value", key);
         input_ele.val(val);
       }

@@ -12,7 +12,6 @@ $(() => {
 			},
 			success: async (res) => {
 			  const res_data = JSON.parse(res);
-			  console.log(res_data);
 			  
 			  if (res_data.status_code == 200) document.getElementById("username_label").textContent = res_data.data.username;
 			  else show_alert(res_data.message)
@@ -61,7 +60,6 @@ $(() => {
     anime_loader.css("display", "none");
   };
   const render_list = (type, data, view_type) => {
-    console.log(data);
     let list_html = "";
     current_view_type = view_type;
 
@@ -73,7 +71,9 @@ $(() => {
 						<div class="other_anime_wrapper" data-slug="${
               item.animeId
             }" data-type="${type}">
-							  <a href="/watch/${encodeURI(item.animeTitle)}?gga=false" class="other_anime_link">
+							  <a href="/watch/${encodeURI(
+                  item.animeTitle
+                )}?gga=false" class="other_anime_link">
 								<div class="other_item_image_wrapper">
 								  <img src="${item.animeImg}" alt="${
             item.animeTitle
@@ -109,7 +109,9 @@ $(() => {
 							<div class="other_anime_wrapper" data-slug="${
                 item.animeId
               }" data-type="${type}">
-							  <a href="/watch/${encodeURI(item.animeTitle)}?gga=false" class="other_anime_link">
+							  <a href="/watch/${encodeURI(
+                  item.animeTitle
+                )}?gga=false" class="other_anime_link">
 								<div class="other_item_image_wrapper">
 								  <img src="${item.animeImg}" alt="${
               item.animeTitle
@@ -146,7 +148,9 @@ $(() => {
 							<div class="other_anime_wrapper" data-slug="${
                 item.animeId
               }" data-type="${type}">
-							  <a href="/watch/${encodeURI(item.animeTitle)}?gga=false" class="other_anime_link">
+							  <a href="/watch/${encodeURI(
+                  item.animeTitle
+                )}?gga=false" class="other_anime_link">
 								<div class="other_item_image_wrapper">
 								  <img src="${item.animeImg}" alt="${
               item.animeTitle
@@ -183,7 +187,9 @@ $(() => {
 							<div class="other_anime_wrapper" data-slug="${
                 item.animeId
               }" data-type="${type}">
-							  <a href="/watch/${encodeURI(item.animeTitle)}?gga=false" class="other_anime_link">
+							  <a href="/watch/${encodeURI(
+                  item.animeTitle
+                )}?gga=false" class="other_anime_link">
 								<div class="other_item_image_wrapper">
 								  <img src="${item.animeImg}" alt="${
               item.animeTitle
@@ -259,7 +265,6 @@ $(() => {
       success: async (res) => {
         const res_data = JSON.parse(res);
         const render_profile_data = (data) => {
-          console.log({ data });
           profile_image_html =
             data.profile_image == "None"
               ? `<img src="${data.default_image}" alt="account image" id="profile_account_image">${vip_logo_html}`
@@ -325,7 +330,9 @@ $(() => {
 				<div class="other_anime_wrapper" data-slug="${
           item.animeId
         }" data-type="${type}">
-				  <a href="/watch/${encodeURI(item.animeTitle)}?gga=false" class="other_anime_link">
+				  <a href="/watch/${encodeURI(
+            item.animeTitle
+          )}?gga=false" class="other_anime_link">
 					<div class="other_item_image_wrapper">
 					  <img src="${item.animeImg}" alt="${
         item.animeTitle
@@ -372,7 +379,6 @@ $(() => {
     const this_ele = $(this);
     const type = this_ele.data("type");
     const data = current_page_type == "likes" ? likes_list[0] : watch_list[0];
-    console.log({ current_page_type });
     render_list(current_page_type, data, type);
   });
 
@@ -409,14 +415,12 @@ $(() => {
       else {
         if (type == "next") {
           const data = likes_list[current_page];
-          console.log({ data });
 
           render_list(current_page_type, data, current_view_type);
 
           if (num_of_items > current_page) likes_current_page++;
         } else {
           const data = likes_list[current_page - 1];
-          console.log({ data });
 
           render_list(current_page_type, data, current_view_type);
 
@@ -431,14 +435,12 @@ $(() => {
       else {
         if (type == "next") {
           const data = watch_list[current_page];
-          console.log({ data });
 
           render_list(current_page_type, data, current_view_type);
 
           if (num_of_items > current_page) watch_current_page++;
         } else {
           const data = watch_list[current_page - 1];
-          console.log({ data });
 
           render_list(current_page_type, data, current_view_type);
 

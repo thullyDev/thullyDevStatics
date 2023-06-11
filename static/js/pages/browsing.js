@@ -2,12 +2,11 @@ $(() => {
   const page_loader_wrapper = $("#page_loader_wrapper");
 
   const get_browsing_data = (data) => {
-	  console.log({ data })
     const render_browsing = (list_data) => {
       let animes_html = "";
       const anime_list = list_data.anime_list;
-	  const animes_length = anime_list.length
-	  const style = animes_length < 10 ? "display: inline-block;" : ""
+      const animes_length = anime_list.length;
+      const style = animes_length < 10 ? "display: inline-block;" : "";
       pages = list_data.pages;
 
       for (let i = 0; i < animes_length; i++) {
@@ -24,11 +23,11 @@ $(() => {
             ? (anime_types_html += `<p class="anime_type  ${attr.toLowerCase()}_type">${attr}</p>`)
             : (anime_eps_html += `<p class="anime_eps">${attr}</p>`);
         }
-		
-		
 
         const anime_html = `
-          <div  class="anime_wrapper" data-gga="false" data-slug="${item.slug}" style="${style}">
+          <div  class="anime_wrapper" data-gga="false" data-slug="${
+            item.slug
+          }" style="${style}">
             <a class="anime_link" href="/watch/${encodeURI(
               item.title
             )}?gga=false">
@@ -55,13 +54,13 @@ $(() => {
             </a>
           </div>
           `;
-		  
+
         animes_html += anime_html;
       }
-	  
+
       document.getElementById("inner_anime_browsing_wrapper").innerHTML =
         animes_html;
-		
+
       document.getElementById(
         "page_label"
       ).textContent = `${current_page} of ${pages}`;
@@ -82,7 +81,9 @@ $(() => {
             data-slug="${item.slug}"
             data-gga="true"
           >
-          <a href="/watch/${encodeURI(item.title)}?gga=false" class="list_anime_link">
+          <a href="/watch/${encodeURI(
+            item.title
+          )}?gga=false" class="list_anime_link">
             <div class="list_anime_img_wrapper">
               <img
                 width="100px"
@@ -125,12 +126,11 @@ $(() => {
         const res_data = JSON.parse(res);
         const browsing_data = res_data.browsing_data;
         // const current_top_airing_data = res_data.current_top_airing_data;
-        console.log(res_data);
 
         browsing_data.status_code == 200
           ? render_browsing(browsing_data.browsing_data)
           : console.log("something went wrong getting trending data...");
-		/*
+        /*
         current_top_airing_data.status_code == 200
           ? render_top_airing(current_top_airing_data.current_top_airing_data)
           : console.log("something went wrong getting trending data...");
@@ -175,8 +175,6 @@ $(() => {
     const inner_wrapper = $(`#${item}_inner_filter_item_wrapper`);
     const open = inner_wrapper.data("open");
 
-    console.log({ open, item });
-
     $(`.inner_filter_item_wrapper`).fadeOut(function () {
       $(this).data("open", false);
     });
@@ -195,7 +193,7 @@ $(() => {
   // document.querySelector('input[name="gender"]:checked');
 
   $("#filter_btn").click(() => {
-	let count = 0
+    let count = 0;
     const filter_input = document.getElementById("filter_inp");
     const checked_genre_inputs = $(".genre_check_input:checked");
     const checked_type_inputs = $(".type_check_input:checked");
@@ -211,48 +209,48 @@ $(() => {
     years_values = "";
     status_values = "";
     language_values = "";
-	
-	count = 0
-	checked_genre_inputs.each(function(){
-		const index = $(this).val()
-		genre_values += count != 0 ? " " + index : index;
-		count++
-	});
-	
-	count = 0
-	checked_type_inputs.each(function(){
-		const index = $(this).val()
-		type_values += count != 0 ? " " + index : index;
-		count++
-	});
-	
-	count = 0
-	checked_years_inputs.each(function(){
-		const index = $(this).val()
-		years_values += count != 0 ? " " + index : index;
-		count++
-	});
-	
-	count = 0
-	checked_season_inputs.each(function(){
-		const index = $(this).val()
-		season_values += count != 0 ? " " + index : index;
-		count++
-	});
-	
-	count = 0
-	checked_language_inputs.each(function(){
-		const index = $(this).val()
-		season_values += count != 0 ? " " + index : index;
-		count++
-	});
-	
-	count = 0
-	checked_status_inputs.each(function(){
-		const index = $(this).val()
-		status_values += count != 0 ? " " + index : index;
-		count++
-	});
+
+    count = 0;
+    checked_genre_inputs.each(function () {
+      const index = $(this).val();
+      genre_values += count != 0 ? " " + index : index;
+      count++;
+    });
+
+    count = 0;
+    checked_type_inputs.each(function () {
+      const index = $(this).val();
+      type_values += count != 0 ? " " + index : index;
+      count++;
+    });
+
+    count = 0;
+    checked_years_inputs.each(function () {
+      const index = $(this).val();
+      years_values += count != 0 ? " " + index : index;
+      count++;
+    });
+
+    count = 0;
+    checked_season_inputs.each(function () {
+      const index = $(this).val();
+      season_values += count != 0 ? " " + index : index;
+      count++;
+    });
+
+    count = 0;
+    checked_language_inputs.each(function () {
+      const index = $(this).val();
+      season_values += count != 0 ? " " + index : index;
+      count++;
+    });
+
+    count = 0;
+    checked_status_inputs.each(function () {
+      const index = $(this).val();
+      status_values += count != 0 ? " " + index : index;
+      count++;
+    });
 
     const data = {
       keyword: filter_keyword,
@@ -265,7 +263,6 @@ $(() => {
       genre: encodeURI(genre_values),
       page: current_page,
     };
-    console.log(data);
     get_browsing_data(data);
   });
 
@@ -287,7 +284,6 @@ $(() => {
           genre: encodeURI(genre_values),
           page: page,
         };
-        console.log(data);
         get_browsing_data(data);
       }
     } else if (type == 2) {
@@ -304,7 +300,6 @@ $(() => {
           genre: encodeURI(genre_values),
           page: page,
         };
-        console.log(data);
         get_browsing_data(data);
       }
     }
@@ -323,7 +318,6 @@ $(() => {
       genre: encodeURI(genre_values),
       page: page,
     };
-    console.log(data);
     get_browsing_data(data);
   });
 });

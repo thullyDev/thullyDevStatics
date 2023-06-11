@@ -47,7 +47,7 @@ const render_search_results = async (val) => {
         </li>
     `;
   }
-	
+
   search_loader_wrapper.style.display = "none";
   search_list_wrapper.innerHTML = animes_html;
 };
@@ -60,29 +60,32 @@ search_inp.on("keyup input", () => {
   }
 });
 
+search_view_all_wrapper.click(function () {
+  const this_ele = $(this);
+  const open = this_ele.data("open");
 
-search_view_all_wrapper.click(function() {
-	const this_ele = $(this)
-	const open = this_ele.data("open")
-	
-	if (open === false) {
-		search_list_wrapper.style.maxHeight = "515px";
-		search_list_wrapper.style.overflowY = "auto";
-		this_ele.text("view less")
-		this_ele.data("open", true)
-	} else {
-		search_list_wrapper.style.maxHeight = "285px";
-		search_list_wrapper.style.overflowY = "hidden";
-		this_ele.text("view all")
-		this_ele.data("open", false)
-	}
+  if (open === false) {
+    search_list_wrapper.style.maxHeight = "515px";
+    search_list_wrapper.style.overflowY = "auto";
+    this_ele.text("view less");
+    this_ele.data("open", true);
+  } else {
+    search_list_wrapper.style.maxHeight = "285px";
+    search_list_wrapper.style.overflowY = "hidden";
+    this_ele.text("view all");
+    this_ele.data("open", false);
+  }
 });
 
+search_btn.addEventListener("click", function () {
+  const val = $(this).val();
 
-search_btn.addEventListener("click", function() {
-  const val = search.value;
-  
-  if (val != "") window.location.replace(`/browsing?keyword=${encodeURI(val)}&type=&status=&season=&language=&sort=default&year=&genre=&page=`);
+  if (val != "")
+    window.location.replace(
+      `/browsing?keyword=${encodeURI(
+        val
+      )}&type=&status=&season=&language=&sort=default&year=&genre=&page=`
+    );
 });
 
 cancel_btn.addEventListener("click", () => {
@@ -103,7 +106,6 @@ close_btn.addEventListener("click", () => {
 
 apper_search_btn.click(function () {
   const is_open = $(this).data("open");
-  console.log({ is_open });
 
   if (!is_open) appear_search_wrapper();
   else disappear_search_wrapper();

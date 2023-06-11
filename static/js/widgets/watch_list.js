@@ -1,16 +1,19 @@
 const get_watch_list_data = () => {
   const render_watch_list = (list_data, is_user) => {
-	  console.log({list_data})
     const animes_wrapper = document.getElementById("watch_list_inner_wrapper");
-    const watch_list_label_wrapper = document.getElementById("watch_list_label_wrapper");
+    const watch_list_label_wrapper = document.getElementById(
+      "watch_list_label_wrapper"
+    );
     let animes_html = "";
     list_data.forEach((item) => {
-	  if (item.animeTitle == "") return null
+      if (item.animeTitle == "") return null;
       const anime_html = `
         <div class="anime_wrapper hori_anime_wrapper" data-hover-type="false" data-id="${
           item.animeId
         }" data-slug="${item.animeId}">
-        <a href="/watch/${encodeURI(item.animeTitle)}?gga=false">
+        <a href="/watch/${encodeURI(item.animeTitle)}?ep=${
+        item.episode
+      }&gga=false">
             <div class="anime_cover_wrapper">
                 <div class="anime_img_details_cover_wrapper">
                     <div class="anime_img_cover_wrapper">
@@ -33,7 +36,8 @@ const get_watch_list_data = () => {
       animes_html += anime_html;
     });
     animes_wrapper.innerHTML = animes_html;
-	watch_list_label_wrapper.textContent = is_user == true ? "Watch list animes" : "Popular animes"
+    watch_list_label_wrapper.textContent =
+      is_user == true ? "Watch list animes" : "Popular animes";
   };
   $.ajax({
     type: "post",
@@ -46,7 +50,6 @@ const get_watch_list_data = () => {
     },
     success: (res) => {
       const res_data = JSON.parse(res);
-	  console.log(res_data)
 
       res_data.status_code == 200
         ? render_watch_list(res_data.watch_list_data, res_data.is_user)

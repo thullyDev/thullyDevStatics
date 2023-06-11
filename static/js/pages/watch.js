@@ -1,24 +1,23 @@
 $(() => {
   const page_loader_wrapper = $("#page_loader_wrapper");
   const player_loader_wrapper = $("#player_loader_wrapper");
-  let next_ready = true
-  
-  $('#player_iframe_wrapper, .server_btns').click(() => show_popup())
-  
+  let next_ready = true;
+
+  $("#player_iframe_wrapper, .server_btns").click(() => show_popup());
+
   const render_trending = (list_data) => {
-	if (related_animes == "False") return null
+    if (related_animes == "False") return null;
     const trending_animes_list_wrapper = document.getElementById(
       "trending_animes_list_wrapper"
     );
     let trending_animes_html = "";
 
     list_data.forEach((item) => {
-		if (item.title == "") return null
+      if (item.title == "") return null;
+      const title = encodeURI(item.title);
       const trending_anime_html = `
         <div class="trending_animes_item">
-          <a class="trending_anime_link_wrapper" href="/watch/${
-            encodeURI(item.title)
-          }?gga=false">
+          <a class="trending_anime_link_wrapper" href="/watch/${title}?gga=false">
             <div class="trending_anime_img_wrapper">
                 <img width="100px" src="${item.image_url}" alt="${
         item.title
@@ -49,7 +48,7 @@ $(() => {
   };
 
   const render_related = (list_data) => {
-	if (related_animes == "False") return null
+    if (related_animes == "False") return null;
     const related_animes_list_wrapper = document.getElementById(
       "related_animes_list_wrapper"
     );
@@ -57,12 +56,11 @@ $(() => {
     let count = 1;
 
     list_data.forEach((item) => {
-		if (item.title == "") return null
+      if (item.title == "") return null;
+      const title = encodeURI(item.title);
       const related_anime_html = `
         <div class="related_animes_item">
-          <a class="related_anime_link_wrapper" href="/watch/${
-            encodeURI(item.title)
-          }?gga=false">
+          <a class="related_anime_link_wrapper" href="/watch/${title}?gga=true">
             <div class="related_anime_img_wrapper">
                 <img width="100px" src="${item.image_url}" alt="${
         item.title
@@ -84,36 +82,26 @@ $(() => {
         ${related_animes_html}
     `;
   };
-  
-  const get_anime_episode = function(ep_num, ep_list) {
-	  for (let i = 0; i < ep_list.length; i++) {
-		  const item = ep_list[i]
-		  
-		  if (parseInt(item.episodeNum) == parseInt(ep_num)) {
-			  return item
-		  } 
-	  }
-	  
-	return ep_list[0]
-  }
-
 
   const render_anime_details = (data, watch_type = "") => {
-	if (data.episodesList.length == 0 || data.episodesList.length == null || data.episodesList.length == undefined) window.location.replace("/alert?message=" + encodeURI(data.animeTitle) + "%20hasn%27t%20not%20come%20out%20yet&sub_message=please%20wait%20for%20it%20to%20be%20air");
-    let genres_text = ""; 
+    if (data.episodesList.length == 0)
+      window.location.replace(
+        "/alert?message=The%20first%20episode%20hasn%27t%20not%20come%20out%20yet&sub_message=please%20wait%20for%20it%20to%20be%20air"
+      );
+    let genres_text = "";
     const anime_title = data.animeTitle;
-	g_anime_title = data.animeTitle;
+    g_anime_title = data.animeTitle;
     episode_list = data.episodesList.reverse();
     let index = episode_num - 1;
-    episode = watch_type == "" ? get_anime_episode(index, episode_list) : get_anime_episode(1, episode_list)
-	
-	console.log({episode_list, index, episode})
+    episode = watch_type == "" ? episode_list[index] : episode_list[0];
     slug = data.slug;
     episode_num = parseInt(episode.episodeNum);
 
     if (episode_notice == "True") {
-		document.getElementById("episode_text").textContent = `episode ${episode_num}`;
-	}
+      document.getElementById(
+        "episode_text"
+      ).textContent = `episode ${episode_num}`;
+    }
 
     if (watch_type != "") {
       document.getElementById("anime_type_btn").textContent = watch_type;
@@ -279,12 +267,12 @@ $(() => {
     });
 
     $(".next_prev_btn").click(async function () {
-	  if (next_ready == false) return null
+      if (next_ready == false) return null;
       const this_ele = $(this);
       const type = this_ele.data("type");
       let pre_index = episode_num;
-	  next_ready = false
-	  show_popup()
+      next_ready = false;
+      show_popup();
 
       if (type == "previous") {
         if (episode_num != 1) pre_index = episode_num - 1;
@@ -293,7 +281,7 @@ $(() => {
       }
 
       if (pre_index != episode_num) {
-        episode = get_anime_episode(pre_index, episode_list)
+        episode = episode_list[pre_index - 1];
         const slug = episode.episodeId;
         let source = "";
         player_loader_wrapper.css("display", "flex");
@@ -342,10 +330,10 @@ $(() => {
           "active_ele"
         );
       } else console.log("already got that for you buddy...");
-	  
-	  setTimeout(function () {
-		  next_ready = true
-	  }, 1000)
+
+      setTimeout(function () {
+        next_ready = true;
+      }, 1000);
     });
 
     $(".server_btns").click(function () {
@@ -387,14 +375,11 @@ $(() => {
 
     $(".anime_ep_btn").click(async function () {
       const this_ele = $(this);
-      const t_episode_number = this_ele.data("episode")
       const episode_slug = this_ele.data("episode-slug");
-      const t_episode = parseInt(this_ele.data("episode"));
-	  
-	  show_popup()
+      const episode = parseInt(this_ele.data("episode"));
+      show_popup();
 
-      if (t_episode != episode_num) {
-		episode = get_anime_episode(t_episode, episode_list)
+      if (episode != episode_num) {
         const player_loader_wrapper = $("#player_loader_wrapper");
         player_loader_wrapper.css("display", "flex");
         let source = "";
@@ -437,7 +422,7 @@ $(() => {
           .addClass("inactive_ele")
           .removeClass("active_ele");
         this_ele.addClass("active_ele");
-        episode_num = t_episode_number;
+        episode_num = episode;
         document.getElementById(
           "episode_text"
         ).textContent = `episode ${episode_num}`;
@@ -463,12 +448,10 @@ $(() => {
       $(".eps_column_wrapper").removeClass("active_eps_column_wrapper");
       $(`#${column_id}`).addClass("active_eps_column_wrapper");
       current_column = column_id;
-      console.log({ column_id, current_column });
       document.getElementById("anime_eps_open_btn").textContent =
         column_id.replace("_", " - ");
 
       if (ep != null) {
-        console.log({ ep });
         const anime_eps_btn = $(`.anime_ep_btn[data-episode="${ep}"]`);
         const anime_eps_btns = $(`.anime_ep_btn`);
 
@@ -581,10 +564,10 @@ $(() => {
       let dark_stars_html = "";
 
       for (let i = 0; i <= count + 1; i += 2)
-        stars_html += `<img data-star="${i}" src="//thullydev.github.io/as2anime_static/static/images/full_star.svg" width="20px" height="20px" alt="close icon" class="star_icon">`;
+        stars_html += `<img data-star="${i}" src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/full_star.svg" width="20px" height="20px" alt="close icon" class="star_icon">`;
 
       for (let i = 0; i <= 5 - count + 1; i += 2)
-        dark_stars_html += `<img data-star="${i}" src="//thullydev.github.io/as2anime_static/static/images/full_star.svg" width="20px" height="20px" alt="close icon" class="dark_star_icon">`;
+        dark_stars_html += `<img data-star="${i}" src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/full_star.svg" width="20px" height="20px" alt="close icon" class="dark_star_icon">`;
 
       const rating_html = `
       <div id="anime_score_wrapper">
@@ -612,7 +595,6 @@ $(() => {
         },
         success: async (res) => {
           const res_data = JSON.parse(res);
-          console.log(res_data);
 
           if (res_data.status_code) {
             const air_date = res_data.date;
@@ -695,9 +677,11 @@ $(() => {
 
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
+      if (item.animeTitle == "") return null;
+      const title = encodeURI(item.animeTitle);
       animes_html += `
         <div class="other_anime_wrapper">
-          <a href="/watch/${encodeURI(item.animeTitle)}?gga=false" class="other_anime_link">
+          <a href="/watch/${title}?gga=false" class="other_anime_link">
             <div class="other_item_image_wrapper">
               <img src="${item.animeImg}" alt="${
         item.animeTitle
@@ -794,35 +778,15 @@ $(() => {
       load_episode();
 
       page_loader_wrapper.css("display", "none");
-	  
-	  $(".eps_column_wrapper").each(function(i, obj) {
-		  const this_ele = $(this)
-		  const col_id = this_ele.attr("id")
-		  const ep_num = parseInt(episode_num)
-		  const min_num = parseInt($.trim(col_id.split("_")[0]))
-		  const max_num = parseInt($.trim(col_id.split("_")[1]))
-		  
-		  if ( ep_num >= min_num && ep_num <= max_num ) {
-			  $(`.anime_eps_btn[data-column="${col_id}"]`).click()
-			  
-			  setTimeout(function() {
-				  document.getElementById(`${ep_num}`).scrollIntoView({
-					  behavior: "smooth",
-					  block: "nearest",
-					  inline: "start",
-				  });
-			  }, 1000)
-		  }
-		  
-		  
-		})
     },
-	error: function (jqXHR, textStatus, errorThrown) {
-	  if (jqXHR.status == 500) {
-		  window.location.replace("/alert?message=The%20anime%20you%20want%20%20is%20not%20out%20yet&sub_message=wait%20for%20the%20anime%20to%20be%20airing");
-	  } else {
-		  show_alert('Unexpected error.');
-	  }
-	},
+    error: function (jqXHR, textStatus, errorThrown) {
+      if (jqXHR.status == 500) {
+        window.location.replace(
+          "/alert?message=The%20anime%20you%20want%20%20is%20not%20out%20yet&sub_message=wait%20for%20the%20anime%20to%20be%20airing"
+        );
+      } else {
+        show_alert("Unexpected error.");
+      }
+    },
   });
 });
