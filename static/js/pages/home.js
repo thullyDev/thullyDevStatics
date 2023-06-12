@@ -597,7 +597,7 @@ $(() => {
         const res_data = await response.json();
         const data = process_toggle_data(res_data, page_source);
         render_recent(data, page_source, page_number);
-        next_toggle_btn.click();
+        // next_toggle_btn.click();
       }
     } else {
       second_half_open = false;
