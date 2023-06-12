@@ -11,9 +11,7 @@ const get_watch_list_data = () => {
         <div class="anime_wrapper hori_anime_wrapper" data-hover-type="false" data-id="${
           item.animeId
         }" data-slug="${item.animeId}">
-        <a href="/watch/${encodeURI(item.animeTitle)}?ep=${
-        item.episode
-      }&gga=false">
+        <a href="/watch/${encodeURI(item.animeTitle)}?gga=false">
             <div class="anime_cover_wrapper">
                 <div class="anime_img_details_cover_wrapper">
                     <div class="anime_img_cover_wrapper">
