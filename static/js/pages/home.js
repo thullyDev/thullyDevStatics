@@ -2,6 +2,7 @@ let page_toggle = "sub";
 let page_source = "gogoanime";
 let page_url = "https://as2vid.co.in/recent-release?type=1";
 let page_number = 1;
+let page_break = false
 let second_half_open = false;
 
 const next_slider = () => {
@@ -609,22 +610,29 @@ $(() => {
   });
 
   next_toggle_btn.click(async function () {
-    if (second_half_open == true) {
-      page_number++;
-      const api_url = `${page_url}&page=${page_number}`;
-      const response = await fetch(api_url);
-      const res_data = await response.json();
-      const data = process_toggle_data(res_data, page_source);
-      render_recent(data, page_source);
-    } else {
-      second_half_open = true;
-      document.getElementById("first_half_animes_wrapper").style.display =
-        "none";
-      document.getElementById("second_half_animes_wrapper").style.display =
-        "flex";
-    }
+	if (page_break == false) {
+		if (second_half_open == true) {
+		  page_number++;
+		  const api_url = `${page_url}&page=${page_number}`;
+		  const response = await fetch(api_url);
+		  const res_data = await response.json();
+		  const data = process_toggle_data(res_data, page_source);
+		  render_recent(data, page_source);
+		} else {
+		  second_half_open = true;
+		  document.getElementById("first_half_animes_wrapper").style.display =
+			"none";
+		  document.getElementById("second_half_animes_wrapper").style.display =
+			"flex";
+		}
+		
+		page_break = true
+	}
+	
+	setTimeout(() => {
+		page_break = false
+	}, 1000)
   });
-
   coming_toggle_btns.click(async function () {
     const this_ele = $(this);
     const wrapper_id = this_ele.data("wrapper");
