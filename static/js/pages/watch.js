@@ -104,7 +104,7 @@ $(() => {
     const anime_title = data.animeTitle;
 	g_anime_title = data.animeTitle;
     episode_list = data.episodesList.reverse();
-    let index = episode_num - 1;
+    let index = episode_num;
     episode = watch_type == "" ? get_anime_episode(index, episode_list) : get_anime_episode(1, episode_list)
 	
 	console.log({episode_list, index, episode})
