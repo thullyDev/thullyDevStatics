@@ -2,8 +2,8 @@ let page_toggle = "sub";
 let page_source = "gogoanime";
 let page_url = "https://as2vid.co.in/recent-release?type=1";
 let page_number = 1;
-let page_break = false
 let second_half_open = false;
+let page_break = false
 
 const next_slider = () => {
   const slider = $("#slider_list_wrapper");
@@ -598,7 +598,7 @@ $(() => {
         const res_data = await response.json();
         const data = process_toggle_data(res_data, page_source);
         render_recent(data, page_source, page_number);
-        // next_toggle_btn.click();
+        next_toggle_btn.click();
       }
     } else {
       second_half_open = false;
@@ -633,6 +633,7 @@ $(() => {
 		page_break = false
 	}, 1000)
   });
+
   coming_toggle_btns.click(async function () {
     const this_ele = $(this);
     const wrapper_id = this_ele.data("wrapper");
@@ -645,16 +646,14 @@ $(() => {
     const this_ele = $(this);
     const day = this_ele.data("day");
     this_ele.siblings().removeClass("active_schedule_day");
-    this_ele.addClass("active_schedule_day");
+    this_ele.addClass("active_schedule_day");	
+	
     $.ajax({
       type: "post",
       url: "/get_schedule_data",
       data: {
         csrfmiddlewaretoken: csrf_token,
         day: day,
-      },
-      beforeSend: () => {
-        //todo: do something here i dont know what do
       },
       success: (res) => {
         const res_data = JSON.parse(res);
