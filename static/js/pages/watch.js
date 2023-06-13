@@ -106,8 +106,6 @@ $(() => {
     episode_list = data.episodesList.reverse();
     let index = episode_num;
     episode = watch_type == "" ? get_anime_episode(index, episode_list) : get_anime_episode(1, episode_list)
-	
-	console.log({episode_list, index, episode})
     slug = data.slug;
     episode_num = parseInt(episode.episodeNum);
 
