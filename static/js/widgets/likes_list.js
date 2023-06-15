@@ -1,5 +1,5 @@
 const get_likes_list_data = () => {
-  const render_likes_list = (list_data, is_user) => {
+  const render_likes_list = (list_data, is_user, status_code) => {
     const animes_wrapper = document.getElementById("likes_list_inner_wrapper");
     const like_list_label_wrapper = document.getElementById(
       "like_list_label_wrapper"
@@ -35,7 +35,7 @@ const get_likes_list_data = () => {
     });
     animes_wrapper.innerHTML = animes_html;
     like_list_label_wrapper.textContent =
-      is_user == true ? "Liked animes" : "Top Airing animes";
+      is_user == true && status_code == 200 ? "Liked animes" : "Top Airing animes";
   };
   $.ajax({
     type: "post",
