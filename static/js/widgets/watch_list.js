@@ -1,5 +1,5 @@
 const get_watch_list_data = () => {
-  const render_watch_list = (list_data, is_user) => {
+  const render_watch_list = (list_data, is_user, status_code) => {
     const animes_wrapper = document.getElementById("watch_list_inner_wrapper");
     const watch_list_label_wrapper = document.getElementById(
       "watch_list_label_wrapper"
@@ -35,7 +35,7 @@ const get_watch_list_data = () => {
     });
     animes_wrapper.innerHTML = animes_html;
     watch_list_label_wrapper.textContent =
-      is_user == true ? "Watch list animes" : "Popular animes";
+      is_user == true && status_code == 200 ? "Watch list animes" : "Popular animes";
   };
   $.ajax({
     type: "post",
@@ -49,8 +49,8 @@ const get_watch_list_data = () => {
     success: (res) => {
       const res_data = JSON.parse(res);
 
-      res_data.status_code == 200
-        ? render_watch_list(res_data.watch_list_data, res_data.is_user)
+      res_data.status_code == 200 || res_data.status_code == 201
+        ? render_watch_list(res_data.watch_list_data, res_data.is_user, res_data.status_code)
         : console.log("something went wrong getting watch list data...");
     },
   });
