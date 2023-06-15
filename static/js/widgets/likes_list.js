@@ -49,8 +49,8 @@ const get_likes_list_data = () => {
     success: (res) => {
       const res_data = JSON.parse(res);
 
-      res_data.status_code == 200
-        ? render_likes_list(res_data.likes_list_data, res_data.is_user)
+      res_data.status_code == 200 || res_data.status_code == 201
+        ? render_likes_list(res_data.likes_list_data, res_data.is_user, res_data.status_code)
         : console.log("something went wrong getting likes list data...");
     },
   });
