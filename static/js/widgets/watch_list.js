@@ -30,7 +30,7 @@ const get_watch_list_data = () => {
             </div>
         </a>
     </div>
-        `;
+        `
       animes_html += anime_html;
     });
     animes_wrapper.innerHTML = animes_html;
