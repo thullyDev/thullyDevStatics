@@ -60,7 +60,7 @@ const set_user = async (data, msg) => {
   set_cookie("temporary_id", data.temporary_id, 365);
   set_cookie("username", data.username, 365);
   show_alert(msg);
-  $(`#outter_auth_wrapper`).fadeOut();
+  window.location.reload();
 };
 
 function delete_all_cookies() {
