@@ -75,11 +75,10 @@ function delete_all_cookies() {
 }
 
 const logout = () => {
-  delete_all_cookies();
+  page == "watch" ? authenticate("logout", {}) : delete_all_cookies();
   show_alert("User has logged out");
   window.location.reload();
 };
-
 const show_auth_wrapper = (wrapper_id) => {
   $(`.auth_block_wrapper`).css("display", "none");
   $(`#${wrapper_id}`).css("display", "flex");
