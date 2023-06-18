@@ -59,10 +59,11 @@ $(() => {
     }
     anime_loader.css("display", "none");
   };
+  
   const render_list = (type, data, view_type) => {
     let list_html = "";
     current_view_type = view_type;
-
+	
     switch (view_type) {
       case "all":
         for (const key in data) {
@@ -88,7 +89,7 @@ $(() => {
 							   <button data-slug="${
                    item.animeId
                  }" data-type="${type}" type="button" class="delete_btn" >
-								<img src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/trash.svg" width="20px" height="20px" alt="delete icon" class="delete_icon">
+								<img src="https://thullydev.github.io/thullyDev/as2anime_static/main/static/images/trash.svg" width="20px" height="20px" alt="delete icon" class="delete_icon">
 							  </button>
 							  <div class="anime_loader" data-type="${type}" data-slug="${item.animeId}">
 								  <div class="loader_two_wrapper">
@@ -102,9 +103,9 @@ $(() => {
       case "unwatched":
         for (const key in data) {
           const item = data[key];
-          const stream_type = item.stream_type;
+          const watch_status = item.watch_status;
 
-          if (stream_type == undefined) {
+          if (watch_status == undefined) {
             list_html += `
 							<div class="other_anime_wrapper" data-slug="${
                 item.animeId
@@ -126,7 +127,7 @@ $(() => {
 							   <button data-slug="${
                    item.animeId
                  }" data-type="${type}" type="button" class="delete_btn" >
-								<img src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/trash.svg" width="20px" height="20px" alt="delete icon" class="delete_icon">
+								<img src="https://thullydev.github.io/thullyDev/as2anime_static/main/static/images/trash.svg" width="20px" height="20px" alt="delete icon" class="delete_icon">
 							  </button>
 							  <div class="anime_loader" data-type="${type}" data-slug="${item.animeId}">
 								  <div class="loader_two_wrapper">
@@ -141,9 +142,9 @@ $(() => {
       case "watched":
         for (const key in data) {
           const item = data[key];
-          const stream_type = item.stream_type;
+          const watch_status = item.watch_status;			
 
-          if (stream_type == "watched") {
+          if (watch_status == "watched") {
             list_html += `
 							<div class="other_anime_wrapper" data-slug="${
                 item.animeId
@@ -165,7 +166,7 @@ $(() => {
 							   <button data-slug="${
                    item.animeId
                  }" data-type="${type}" type="button" class="delete_btn" >
-								<img src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/trash.svg" width="20px" height="20px" alt="delete icon" class="delete_icon">
+								<img src="https://thullydev.github.io/thullyDev/as2anime_static/main/static/images/trash.svg" width="20px" height="20px" alt="delete icon" class="delete_icon">
 							  </button>
 							  <div class="anime_loader" data-type="${type}" data-slug="${item.animeId}">
 								  <div class="loader_two_wrapper">
@@ -180,9 +181,9 @@ $(() => {
       case "watching":
         for (const key in data) {
           const item = data[key];
-          const stream_type = item.stream_type;
+          const watch_status = item.watch_status;
 
-          if (stream_type == "watching") {
+          if (watch_status == "watching") {
             list_html += `
 							<div class="other_anime_wrapper" data-slug="${
                 item.animeId
@@ -204,7 +205,7 @@ $(() => {
 							   <button data-slug="${
                    item.animeId
                  }" data-type="${type}" type="button" class="delete_btn" >
-								<img src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/trash.svg" width="20px" height="20px" alt="delete icon" class="delete_icon">
+								<img src="https://thullydev.github.io/thullyDev/as2anime_static/main/static/images/trash.svg" width="20px" height="20px" alt="delete icon" class="delete_icon">
 							  </button>
 							  <div class="anime_loader" data-type="${type}" data-slug="${item.animeId}">
 								  <div class="loader_two_wrapper">
@@ -220,14 +221,14 @@ $(() => {
     document.getElementById(
       `text_nav_view_label_wrapper`
     ).textContent = `${type} list`;
-    const list_keys = Object.keys(data);
-    if (list_keys.length != 0) {
+	
+    if (list_html) {
       document.getElementById(`view_wrapper`).innerHTML = list_html;
     } else {
       document.getElementById(`view_wrapper`).innerHTML = `
 				<div id="empty_list_wrapper">
 					<div id="empty_list_image_wrapper">
-						<img src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/empty_list_image.png" width="20px" height="20px" alt="empty list alert image" class="empty_list_image">
+						<img src="https://thullydev.github.io/thullyDev/as2anime_static/main/static/images/empty_list_image.png" width="20px" height="20px" alt="empty list alert image" class="empty_list_image">
 					</div>
 					<div id="empty_list_text_wrapper">Nothing yet...</div>
 				</div>
@@ -303,8 +304,12 @@ $(() => {
       },
     });
   };
+  
   const search_list = (list, key_word, type) => {
-    let filtered_list = list.filter((txt) => txt.indexOf(key_word) !== -1);
+	const filter_matches = (text, list) => {
+		return list.filter((e) => e.includes(text.toLowerCase()))
+	}
+    let filtered_list = filter_matches(key_word, list);
     let temp_dict = {};
 
     for (let i = 0; i < filtered_list.length; i++) {
@@ -347,7 +352,7 @@ $(() => {
 				   <button data-slug="${
              item.animeId
            }" data-type="${type}" type="button" class="delete_btn" >
-					<img src="https://raw.githubusercontent.com/thullyDev/as2anime_static/main/static/images/trash.svg" width="20px" height="20px" alt="delete icon" class="delete_icon">
+					<img src="https://thullydev.github.io/thullyDev/as2anime_static/main/static/images/trash.svg" width="20px" height="20px" alt="delete icon" class="delete_icon">
 				  </button>
 				  <div class="anime_loader" data-type="${type}" data-slug="${item.animeId}">
 					  <div class="loader_two_wrapper">
@@ -431,7 +436,7 @@ $(() => {
       let current_page = watch_current_page;
       const num_of_items = watch_list.length;
 
-      if (num_of_items <= 1) show_alert("this is the only page");
+      if (num_of_items <= 1) show_alert("This is the only page");
       else {
         if (type == "next") {
           const data = watch_list[current_page];
