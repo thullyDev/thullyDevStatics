@@ -35,9 +35,8 @@ const add_to_list = async (slug, list) => {
   const raw_res_data = await response.json();
   const res_data = JSON.parse(raw_res_data.replace(/'/g, '"'));
 
-  res_data.status_code == 503
-    ? render_authentication("login")
-    : show_alert(res_data.message);
+  if (res_data.status_code == 503) render_authentication("login")
+  if (res_data.status_code == 200) show_alert(res_data.message);
 };
 
 $(window).click(function () {
