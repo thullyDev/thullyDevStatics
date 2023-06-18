@@ -86,17 +86,24 @@ $(() => {
   };
   
   const get_anime_episode = function(ep_num, ep_list) {
+	let episode = ep_list[0]
+	let watch_status = "watching"
+	
 	  for (let i = 0; i < ep_list.length; i++) {
 		  const item = ep_list[i]
 		  
 		  if (parseInt(item.episodeNum) == parseInt(ep_num)) {
-			  return item
+			  episode = item
 		  } 
 	  }
-	  
-	return ep_list[0]
+	
+	const last_episode = ep_list[ep_list.length-1]
+	
+	if (last_episode.episodeNum === episode.episodeNum) watch_status = "watched"
+	
+	add_to_list(slug + "-**-" + watch_status, 'check')
+	return episode
   }
-
 
   const render_anime_details = (data, watch_type = "") => {
 	if (data.episodesList.length == 0 || data.episodesList.length == null || data.episodesList.length == undefined) window.location.replace("/alert?message=" + encodeURI(data.animeTitle) + "%20hasn%27t%20not%20come%20out%20yet&sub_message=please%20wait%20for%20it%20to%20be%20air");
@@ -106,6 +113,7 @@ $(() => {
     episode_list = data.episodesList.reverse();
     let index = episode_num;
     episode = watch_type == "" ? get_anime_episode(index, episode_list) : get_anime_episode(1, episode_list)
+	
     slug = data.slug;
     episode_num = parseInt(episode.episodeNum);
 
