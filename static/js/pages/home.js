@@ -309,7 +309,7 @@ const get_schedule_data = () => {
 		);
 		 swipper_script.setAttribute(
 			  'src',
-			  "/static/swipper.js",
+			  "//thullydev.github.io/as2anime_static/static/js/widgets/swipper.js",
 			);
 		document.body.appendChild(src_script);
 
