@@ -113,12 +113,9 @@ const render_recent = (list_data, source) => {
         </div>
         `;
       } else {
-	      
-		const temp = encodeURI(item.title)
-		if (temp == "") return null
         anime_html = `
         <div  class="anime_wrapper" data-gga="true" data-slug="${item.slug}">
-          <a href="/watch/${temp}?ep=${
+          <a href="/watch/${encodeURI(item.title)}?ep=${
           item.episode
         }&gga=false">
               <div class="anime_cover_wrapper">
@@ -167,7 +164,6 @@ const render_recent = (list_data, source) => {
     });
   } else {
     list_data.forEach((item) => {
-	    
 		const temp = encodeURI(item.title)
 		if (temp == "") return null
       anime_html = `
@@ -229,7 +225,6 @@ const render_schedule = (list_data) => {
     const schedule_wrapper = document.getElementById(schedule_wrapper_id);
     let schedule_anime_html = "";
     for (let i = 0; i < list.length; i++) {
-      // TODO: convert the time and day to users local time
       const item = list[i];
       schedule_anime_html += `
       <div data-day="${item.day}" class="schedule_anime_wrapper">
@@ -267,6 +262,122 @@ const render_schedule = (list_data) => {
 
     count++;
   }
+};
+
+
+const get_schedule_data = () => {
+	const d = new Date();
+	const tz_offset = d.getTimezoneOffset();
+    const url = "/get_schedule_data?tz_offset="+tz_offset
+  $.ajax({
+    type: "get",
+    url: url,
+    success: (res) => {
+      const res_data = JSON.parse(res);
+	  
+	  if(res_data.status_code) {
+		  const html = $(res_data.data.html)
+		  let dates = []
+		  
+		  html.find(".day-item").each(async function (i, ele) {
+			const this_ele = $(this);
+			const whole_date = this_ele.data("date");
+			const day = this_ele.find("span").text();
+			const date = this_ele.find(".date").text();
+
+			dates.push({
+			  whole_date,
+			  day,
+			  date,
+			});
+		  });
+		  
+		 let dates_html = ""
+		 for(let i = 0; i < dates.length; i++) {
+			 const item = dates[i]
+			 dates_html += `<div data-date="${item.whole_date}" class="swiper-slide schedule_days">${item.day.toUpperCase()} <span style="margin-left: 10px;font-size: 15px;display: flex;justify-content: center;align-items: end;">${item.date}</span></div>`
+		 }
+	
+		 $("#schedule_dates_wrapper").html(dates_html)
+		 
+		 const src_script = document.createElement('script');
+		 const swipper_script = document.createElement('script');
+		 
+		 src_script.setAttribute(
+		  'src',
+		  "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js",
+		);
+		 swipper_script.setAttribute(
+			  'src',
+			  "/static/swipper.js",
+			);
+		document.body.appendChild(src_script);
+
+		setTimeout(function(){
+			document.body.appendChild(swipper_script);
+		}, 1000); 
+		
+		
+		$(".schedule_days").click(async function () {
+			const this_ele = $(this);
+			const date = this_ele.data("date");
+			this_ele.siblings().removeClass("active_schedule_day");
+			this_ele.addClass("active_schedule_day");
+			const url = "/get_schedule_data?tz_offset="+tz_offset+"&day="+date
+			
+			$.ajax({
+			  type: "get",
+			  url: url,
+			  success: (res) => {
+				const res_data = JSON.parse(res);
+
+				if (res_data.status_code == 200) {
+					const html = $(res_data.data.html)
+					let animes = []
+					
+					html.find(".tsl-link").each(async function (i, ele) {
+						const this_ele = $(this);
+						const time = this_ele.find(".time").text();
+						const day = this_ele.find(".time").text();
+						const title = this_ele.find(".film-name").text();
+						const episode = this_ele.find(".btn-play").text().replace("Episode", "").trim();
+
+						animes.push({
+						  day,
+						  time,
+						  title,
+						  episode,
+						});
+					});
+					
+					render_schedule(animes)
+					
+				} else  console.log("something went wrong getting schedule data...");
+			  },
+			});
+	    });
+		
+		const date = new Date();
+
+		let day = JSON.stringify(date.getDate())
+		let month = JSON.stringify(date.getMonth() + 1)
+		let year = date.getFullYear();
+		if (day.length == 1) {
+			day = "0"+day
+		}
+		if (month.length == 1) {
+			month = "0"+month
+		}
+		let current_date = `${year}-${month}-${day}`;
+		
+		$(`.schedule_days[data-date="${current_date}"]`).click()
+		
+		
+		$(`#outter_schedule_wrapper`).css("display", "flex")
+		
+	  } else console.log("something went wrong getting schedule...")
+    },
+  });
 };
 
 const get_home_data = () => {
@@ -340,7 +451,7 @@ const get_home_data = () => {
       const res_data = JSON.parse(res);
       const slider_data = res_data.slider_data;
       const recent_data = res_data.recent_data;
-      const schedule_data = res_data.schedule_data;
+      // const schedule_data = res_data.schedule_data;
 
       slider_data.status_code == 200 && slider_data.slider_enabled == true
         ? render_slider(slider_data.slider_data)
@@ -351,12 +462,15 @@ const get_home_data = () => {
       recent_data.status_code == 200
         ? render_recent(recent_data.recent_data)
         : console.log("something went wrong getting recent data...");
+		
+		
+	  get_schedule_data();
 
-      schedule_data.status_code == 200 && schedule_data.schedule_enabled == true
-        ? render_schedule(schedule_data.schedule_data)
-        : console.log(
-            "something went wrong getting schedule data or the schedule has been disabled"
-          );
+      // schedule_data.status_code == 200 && schedule_data.schedule_enabled == true
+        // ? render_schedule(schedule_data.schedule_data)
+        // : console.log(
+            // "something went wrong getting schedule data or the schedule has been disabled"
+          // );
 
       page_loader_wrapper.css("display", "none");
     },
@@ -569,6 +683,7 @@ const process_toggle_data = (res_data, source) => {
 };
 
 get_home_data();
+
 get_coming_data();
 
 $(() => {
@@ -576,7 +691,6 @@ $(() => {
   const prev_toggle_btn = $(".prev_toggle_btn");
   const next_toggle_btn = $(".next_toggle_btn");
   const coming_toggle_btns = $(".coming_toggle_btns");
-  const schedule_days = $(".schedule_days");
   const show_btn = $("#show_btn");
 
   toggle_link.click(async function () {
@@ -648,30 +762,6 @@ $(() => {
     coming_wrapper.addClass("active_section_wrapper");
   });
 
-  schedule_days.click(async function () {
-    const this_ele = $(this);
-    const day = this_ele.data("day");
-    this_ele.siblings().removeClass("active_schedule_day");
-    this_ele.addClass("active_schedule_day");	
-	
-    $.ajax({
-      type: "post",
-      url: "/get_schedule_data",
-      data: {
-        csrfmiddlewaretoken: csrf_token,
-        day: day,
-      },
-      success: (res) => {
-        const res_data = JSON.parse(res);
-        const schedule_data = res_data.schedule_data;
-
-        res_data.status_code == 200
-          ? render_schedule(schedule_data)
-          : console.log("something went wrong getting schedule data...");
-      },
-    });
-  });
-
   show_btn.click(async function () {
     const this_ele = $(this);
     const wrapper_is_open = this_ele.data("open");
@@ -688,13 +778,11 @@ $(() => {
 });
 
 setInterval(() => {
-  const current_tokyo_date_time = new Date().toLocaleString("en-US", {
-    timeZone: "Asia/Tokyo",
-  });
-  const temp_list = current_tokyo_date_time.replace(",", "").split(" ");
-  const tokyo_date_now = temp_list[0];
-  const tokyo_time_now = temp_list[1];
-  const date_time_string = ` - Asia/Tokyo: ${tokyo_date_now} ${tokyo_time_now}`;
+  const current_date_time = new Date().toLocaleString()
+  const temp_list = current_date_time.replace(",", "").split(" ");
+  const date_now = temp_list[0];
+  const time_now = temp_list[1];
+  const date_time_string = ` - Time: ${date_now} ${time_now}`;
   const inner_time_date_wrapper = document.getElementById(
     "inner_time_date_wrapper"
   );
