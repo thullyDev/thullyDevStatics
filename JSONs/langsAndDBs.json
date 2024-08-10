@@ -1,0 +1,266 @@
+{
+  "python": {
+    "name": "Python",
+    "icon": "devicon-python-plain"
+  },
+  "javascript": {
+    "name": "JavaScript",
+    "icon": "devicon-javascript-plain"
+  },
+  "java": {
+    "name": "Java",
+    "icon": "devicon-java-plain"
+  },
+  "cpp": {
+    "name": "C++",
+    "icon": "devicon-cplusplus-plain"
+  },
+  "csharp": {
+    "name": "C#",
+    "icon": "devicon-csharp-plain"
+  },
+  "php": {
+    "name": "PHP",
+    "icon": "devicon-php-plain"
+  },
+  "ruby": {
+    "name": "Ruby",
+    "icon": "devicon-ruby-plain"
+  },
+  "swift": {
+    "name": "Swift",
+    "icon": "devicon-swift-plain"
+  },
+  "typescript": {
+    "name": "TypeScript",
+    "icon": "devicon-typescript-plain"
+  },
+  "go": {
+    "name": "Go",
+    "icon": "devicon-go-plain"
+  },
+  "rust": {
+    "name": "Rust",
+    "icon": "devicon-rust-plain"
+  },
+  "kotlin": {
+    "name": "Kotlin",
+    "icon": "devicon-kotlin-plain"
+  },
+  "scala": {
+    "name": "Scala",
+    "icon": "devicon-scala-plain"
+  },
+  "r": {
+    "name": "R",
+    "icon": "devicon-r-plain"
+  },
+  "dart": {
+    "name": "Dart",
+    "icon": "devicon-dart-plain"
+  },
+  "objectivec": {
+    "name": "Objective-C",
+    "icon": "devicon-objectivec-plain"
+  },
+  "haskell": {
+    "name": "Haskell",
+    "icon": "devicon-haskell-plain"
+  },
+  "lua": {
+    "name": "Lua",
+    "icon": "devicon-lua-plain"
+  },
+  "julia": {
+    "name": "Julia",
+    "icon": "devicon-julia-plain"
+  },
+  "matlab": {
+    "name": "MATLAB",
+    "icon": "devicon-matlab-plain"
+  },
+  "groovy": {
+    "name": "Groovy",
+    "icon": "devicon-groovy-plain"
+  },
+  "perl": {
+    "name": "Perl",
+    "icon": "devicon-perl-plain"
+  },
+  "clojure": {
+    "name": "Clojure",
+    "icon": "devicon-clojure-plain"
+  },
+  "elixir": {
+    "name": "Elixir",
+    "icon": "devicon-elixir-plain"
+  },
+  "erlang": {
+    "name": "Erlang",
+    "icon": "devicon-erlang-plain"
+  },
+  "fsharp": {
+    "name": "F#",
+    "icon": "devicon-fsharp-plain"
+  },
+  "visualbasic": {
+    "name": "Visual Basic",
+    "icon": "devicon-dot-net-plain"
+  },
+  "assembly": {
+    "name": "Assembly",
+    "icon": "fa-microchip" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "cobol": {
+    "name": "COBOL",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "fortran": {
+    "name": "Fortran",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "lisp": {
+    "name": "Lisp",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "prolog": {
+    "name": "Prolog",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "ada": {
+    "name": "Ada",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "scheme": {
+    "name": "Scheme",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "bash": {
+    "name": "Bash",
+    "icon": "devicon-bash-plain"
+  },
+  "powershell": {
+    "name": "PowerShell",
+    "icon": "devicon-powershell-plain"
+  },
+  "html": {
+    "name": "HTML",
+    "icon": "devicon-html5-plain"
+  },
+  "css": {
+    "name": "CSS",
+    "icon": "devicon-css3-plain"
+  },
+  "xml": {
+    "name": "XML",
+    "icon": "fa-file-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "json": {
+    "name": "JSON",
+    "icon": "fa-file-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "yaml": {
+    "name": "YAML",
+    "icon": "fa-file-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "markdown": {
+    "name": "Markdown",
+    "icon": "devicon-markdown-plain"
+  },
+  "latex": {
+    "name": "LaTeX",
+    "icon": "devicon-latex-plain"
+  },
+  "tcl": {
+    "name": "Tcl",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "verilog": {
+    "name": "Verilog",
+    "icon": "fa-microchip" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "vhdl": {
+    "name": "VHDL",
+    "icon": "fa-microchip" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "sas": {
+    "name": "SAS",
+    "icon": "fa-chart-bar" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "d": {
+    "name": "D",
+    "icon": "devicon-d-plain"
+  },
+  "forth": {
+    "name": "Forth",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "logo": {
+    "name": "Logo",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "scratch": {
+    "name": "Scratch",
+    "icon": "fa-puzzle-piece" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "pascal": {
+    "name": "Pascal",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "delphi": {
+    "name": "Delphi",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "actionscript": {
+    "name": "ActionScript",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "vbscript": {
+    "name": "VBScript",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "applescript": {
+    "name": "AppleScript",
+    "icon": "fa-apple" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "smalltalk": {
+    "name": "Smalltalk",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "racket": {
+    "name": "Racket",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "ocaml": {
+    "name": "OCaml",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "hack": {
+    "name": "Hack",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "apex": {
+    "name": "Apex",
+    "icon": "fa-cloud" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "abap": {
+    "name": "ABAP",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "solidity": {
+    "name": "Solidity",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "vba": {
+    "name": "VBA",
+    "icon": "fa-code" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "mathematica": {
+    "name": "Mathematica",
+    "icon": "fa-square-root-alt" // No direct equivalent in Devicons, fallback to FontAwesome
+  },
+  "wolfram": {
+    "name": "Wolfram",
+    "icon": "fa-square-root-alt" // No direct equivalent in Devicons, fallback to FontAwesome
+  }
+}
