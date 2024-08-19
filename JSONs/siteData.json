@@ -20,9 +20,9 @@
      "youtube": "https://www.youtube.com/channel/UC-thullydev",
 },
 "images": {
-     "profile_image": "",
-     "side_footer_image": "",
-     "favicon": "",
-     "description": "",
+     "profile_image": "https://thullydev.github.io/thullyDevStatics/images/profile-2.jpg",
+     "side_footer_image": "https://thullydev.github.io/thullyDevStatics/images/footer.png",
+     "favicon": "https://thullydev.github.io/thullyDevStatics/images/profile.jpg",
+     "description": "https://thullydev.github.io/thullyDevStatics/images/profile-2.jpg",
 }
 }
