@@ -7,7 +7,7 @@
      "donate_slug": "thullyDev",
      "donate_link": "https://buymeacoffee.com/",
      "seo_decription": "Thulaganyo Mooki is an experienced fullstack developer with a focus on backend development using Python. Explore my portfolio to see my work in web development, backend systems, and more.",
-     "seo_title": "Fullstack Developer | Python Backend Specialist",
+     "seo_title": "Fullstack Developer | Python Backend Specialist"
 },
 "socials": {
      "linkedin": "https://www.linkedin.com/in/thulaganyo-mooki",
@@ -17,12 +17,12 @@
      "twitter": "https://twitter.com/thullydev",
      "discord": "https://www.discord.com/",
      "github": "https://github.com/thullyDev",
-     "youtube": "https://www.youtube.com/channel/UC-thullydev",
+     "youtube": "https://www.youtube.com/channel/UC-thullydev"
 },
 "images": {
      "profile_image": "https://thullydev.github.io/thullyDevStatics/images/profile-2.jpg",
      "side_footer_image": "https://thullydev.github.io/thullyDevStatics/images/footer.png",
      "favicon": "https://thullydev.github.io/thullyDevStatics/images/profile.jpg",
-     "description": "https://thullydev.github.io/thullyDevStatics/images/profile-2.jpg",
+     "description": "https://thullydev.github.io/thullyDevStatics/images/profile-2.jpg"
 }
 }
